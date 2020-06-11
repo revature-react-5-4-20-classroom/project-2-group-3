@@ -28,6 +28,12 @@ public class Doctor {
   @Column(name = "speciality")
   private String speciality;
   
+  @Column(name = "username")
+  private String username;
+  
+  @Column(name = "password")
+  private String password;
+  
   @JoinColumn(name = "department_id")
   @ManyToOne(fetch = FetchType.EAGER)
   private Department department;
@@ -37,12 +43,14 @@ public class Doctor {
   }
 
   public Doctor(Integer doctorId, String firstName, String lastName, String speciality,
-      Department department) {
+      String username, String password, Department department) {
     super();
     this.doctorId = doctorId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.speciality = speciality;
+    this.username = username;
+    this.password = password;
     this.department = department;
   }
 
@@ -78,6 +86,22 @@ public class Doctor {
     this.speciality = speciality;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   public Department getDepartment() {
     return department;
   }
@@ -89,8 +113,11 @@ public class Doctor {
   @Override
   public String toString() {
     return "Doctor [doctorId=" + doctorId + ", firstName=" + firstName + ", lastName=" + lastName
-        + ", speciality=" + speciality + ", department=" + department + "]";
+        + ", speciality=" + speciality + ", username=" + username + ", password=" + password
+        + ", department=" + department + "]";
   }
+
+  
   
   
   
