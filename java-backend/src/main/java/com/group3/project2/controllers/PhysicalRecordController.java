@@ -14,7 +14,7 @@ import com.group3.project2.exceptions.PhysicalRecordNotFoundException;
 import com.group3.project2.models.PhysicalRecord;
 import com.group3.project2.services.PhysicalRecordService;
 
-@RequestMapping(path = "/physicalRecords")
+@RequestMapping(path = "/physicals")
 @RestController
 public class PhysicalRecordController {
   
