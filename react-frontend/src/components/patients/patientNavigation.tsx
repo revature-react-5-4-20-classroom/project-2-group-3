@@ -25,7 +25,7 @@ return(
         <NavLink  to="/patient/appointments" className="nav-link" activeClassName="active">Appointments</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink  to="/doctorlogin" className="nav-link" activeClassName="active">New Appointment</NavLink>
+        <NavLink  to="/patient/newappointment" className="nav-link" activeClassName="active">New Appointment</NavLink>
       </NavItem>
     
     
