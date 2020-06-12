@@ -14,7 +14,6 @@ import javax.persistence.Table;
 public class PhysicalRecord {
   
   @Id
-  @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JoinColumn(name = "appointmentId")
   @OneToOne(fetch = FetchType.EAGER)

@@ -7,9 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(schema = "projecttwo", name = "patient")
@@ -20,10 +23,12 @@ public class Patient {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer patientId;
   
-  @JoinColumn(name = "record_id")
-  @OneToOne(fetch = FetchType.EAGER)
-  @Column(name = "last_record")
-  private Integer lastRecord;
+  //@JoinColumn(name = "last_record")
+  //@OneToOne(fetch = FetchType.EAGER)
+  private PhysicalRecord lastRecord;
+  
+  @OneToMany(mappedBy = "patientId")
+  private List<EContact> eContacts;
   
   @Column(name = "first_name")
   private String firstName;
@@ -56,7 +61,7 @@ public class Patient {
     super();
   }
 
-  public Patient(Integer patientId, Integer lastrecord,String firstName, String lastName, String gender,
+  public Patient(Integer patientId, PhysicalRecord lastrecord,String firstName, String lastName, String gender,
       String username, String password, Date birthdate, String address, String phone, String email) {
     super();
     this.patientId = patientId;
@@ -80,11 +85,11 @@ public class Patient {
     this.patientId = patientId;
   }
 
-  public Integer getLastRecord() {
+  public PhysicalRecord getLastRecord() {
     return lastRecord;
   }
 
-  public void setLastRecord(Integer last_record) {
+  public void setLastRecord(PhysicalRecord last_record) {
     this.lastRecord = last_record;
   }
 

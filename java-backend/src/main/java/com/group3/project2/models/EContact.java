@@ -31,16 +31,16 @@ public class EContact {
   @Column(name = "relation")
   private String relation;
   
-  @JoinColumn(name = "patient_id")
+  @JoinColumn(name = "patientId")
   @ManyToOne(fetch = FetchType.EAGER)
-  private Integer patientId;
+  private Patient patientId;
   
   public EContact() {
     super();
   }
 
   public EContact(Integer eContactId, String name, String address, String phone, String relation,
-      Integer patientId) {
+      Patient patientId) {
     super();
     this.eContactId = eContactId;
     this.name = name;
@@ -82,11 +82,11 @@ public class EContact {
     this.relation = relation;
   }
 
-  public Integer getPatientId() {
+  public Patient getPatientId() {
     return patientId;
   }
 
-  public void setPatientId(Integer patientId) {
+  public void setPatientId(Patient patientId) {
     this.patientId = patientId;
   }
 
