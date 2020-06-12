@@ -1,6 +1,7 @@
 package com.group3.project2.models;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +23,9 @@ public class Department {
   @Column(name = "name")
   private String departmentName;
   
-//  @OneToMany(mappedBy = "department_id")
-//  @JsonIgnoreProperties({"department_id"})
-//  private List<Doctor> doctors;
+  @OneToMany(mappedBy = "department")
+  @JsonIgnoreProperties({"department"})
+  private List<Doctor> doctors;
   
   public Department() {
     super();
@@ -54,7 +55,13 @@ public class Department {
     this.departmentName = departmentName;
   }
 
-
+  public List<Doctor> getDoctors() {
+    return this.doctors;
+  }
+  
+  public void setDoctors(List<Doctor> doctors) {
+    this.doctors = doctors;
+  }
   @Override
   public String toString() {
     return "Department [id=" + id + ", departmentName=" + departmentName + "]";

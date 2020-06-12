@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.group3.project2.exceptions.DepartmentNotFoundException;
 import com.group3.project2.models.Department;
+import com.group3.project2.models.Doctor;
 import com.group3.project2.services.DepartmentService;
 
 @RequestMapping(path = "/departments")
@@ -31,5 +32,11 @@ public class DepartmentController {
     }catch(DepartmentNotFoundException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
+  }
+  
+  @GetMapping("/{id}/doctors")
+  public List<Doctor> getDoctorsByDepartmentId(@PathVariable Integer id) {
+    Department department = this.getDepartmentById(id);
+    return department.getDoctors();
   }
 }
