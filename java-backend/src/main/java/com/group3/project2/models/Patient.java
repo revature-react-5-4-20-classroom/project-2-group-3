@@ -20,10 +20,10 @@ public class Patient {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer patientId;
   
-  //@JoinColumn(name = "record_id");
-  //OneToOne(fetch = FetchType.EAGER);
+  @JoinColumn(name = "record_id")
+  @OneToOne(fetch = FetchType.EAGER)
   @Column(name = "last_record")
-  private Integer last_record;
+  private Integer lastRecord;
   
   @Column(name = "first_name")
   private String firstName;
@@ -56,10 +56,11 @@ public class Patient {
     super();
   }
 
-  public Patient(Integer patientId, String firstName, String lastName, String gender,
+  public Patient(Integer patientId, Integer lastrecord,String firstName, String lastName, String gender,
       String username, String password, Date birthdate, String address, String phone, String email) {
     super();
     this.patientId = patientId;
+    this.lastRecord = lastrecord;
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
@@ -74,13 +75,17 @@ public class Patient {
   public Integer getPatientId() {
     return patientId;
   }
-
-  public Integer getLast_record() {
-    return last_record;
+  
+  public void setPatientId(Integer patientId) {
+    this.patientId = patientId;
   }
 
-  public void setLast_record(Integer last_record) {
-    this.last_record = last_record;
+  public Integer getLastRecord() {
+    return lastRecord;
+  }
+
+  public void setLastRecord(Integer last_record) {
+    this.lastRecord = last_record;
   }
 
   public String getFirstName() {
@@ -157,9 +162,9 @@ public class Patient {
 
   @Override
   public String toString() {
-    return "Patient [patientId=" + patientId + ", firstName=" + firstName + ", lastName=" + lastName
-        + ", gender=" + gender + ", username=" + username + ", password=" + password
-        + ", birthDate=" + birthDate + ", address=" + address + ", phone=" + phone + ", email="
-        + email + "]";
+    return "Patient [patientId=" + patientId + ", lastRecord=" + lastRecord + ", firstName="
+        + firstName + ", lastName=" + lastName + ", gender=" + gender + ", username=" + username
+        + ", password=" + password + ", birthDate=" + birthDate + ", address=" + address
+        + ", phone=" + phone + ", email=" + email + "]";
   }
 }
