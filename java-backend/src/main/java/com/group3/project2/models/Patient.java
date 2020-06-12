@@ -23,8 +23,8 @@ public class Patient {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer patientId;
   
-  //@JoinColumn(name = "last_record")
-  //@OneToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "last_record")
+  @OneToOne(fetch = FetchType.EAGER)
   private PhysicalRecord lastRecord;
   
   @OneToMany(mappedBy = "patientId")

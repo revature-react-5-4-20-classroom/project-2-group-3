@@ -1,5 +1,6 @@
 package com.group3.project2.models;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -14,10 +17,11 @@ import javax.persistence.Table;
 public class PhysicalRecord {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer appointmentId;
   @JoinColumn(name = "appointmentId")
   @OneToOne(fetch = FetchType.EAGER)
-  private Integer appointmentId;
+  @MapsId
+  private Appointment appointment;
   
   @Column(name = "height")
   private Double height;
@@ -40,10 +44,11 @@ public class PhysicalRecord {
   @Column(name = "notes")
   private String notes;
 
-  public PhysicalRecord(Integer appointmentId, Double height, Double weight, Integer age,
+  public PhysicalRecord(Integer appointmentId, Appointment appointment, Double height, Double weight, Integer age,
       String diagnosis, String prescribedAction, String prescribedMedication, String notes) {
     super();
     this.appointmentId = appointmentId;
+    this.appointment = appointment;
     this.height = height;
     this.weight = weight;
     this.age = age;

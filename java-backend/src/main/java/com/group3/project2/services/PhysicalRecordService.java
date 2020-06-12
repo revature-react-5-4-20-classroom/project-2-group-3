@@ -13,7 +13,7 @@ public class PhysicalRecordService {
   
   @Autowired
   PhysicalRecordRepository physicalRecordRepository;
-  
+  /*
   public List<PhysicalRecord> getAll() {
     return physicalRecordRepository.findAll();
   }
@@ -40,4 +40,5 @@ public class PhysicalRecordService {
       throw new PhysicalRecordNotFoundException();
     }
   }
+  */
 }

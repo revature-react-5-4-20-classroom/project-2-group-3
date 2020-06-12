@@ -20,7 +20,7 @@ public class PhysicalRecordController {
   
   @Autowired
   PhysicalRecordService physicalRecordService;
-  
+  /*
   @GetMapping
   public List<PhysicalRecord> getAllPhysicalRecords() {
     return physicalRecordService.getAll();
@@ -45,4 +45,5 @@ public class PhysicalRecordController {
     physicalRecord.setPhysicalRecordId(id);
     return physicalRecordService.update(physicalRecord);
   }
+  */
 }
