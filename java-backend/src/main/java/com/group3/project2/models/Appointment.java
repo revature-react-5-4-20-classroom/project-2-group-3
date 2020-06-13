@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(schema = "projecttwo", name = "appointment")
@@ -31,6 +32,7 @@ public class Appointment {
   
   @JoinColumn(name = "doctor_id")
   @ManyToOne(fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({"appointments"})
   private Doctor doctor;
   
   @JoinColumn(name = "patient_id")
