@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.group3.project2.exceptions.DoctorNotFoundException;
+import com.group3.project2.models.Appointment;
 import com.group3.project2.models.Doctor;
 import com.group3.project2.services.DoctorService;
 
@@ -19,17 +20,17 @@ import com.group3.project2.services.DoctorService;
 public class DoctorController {
   
   @Autowired
-  DoctorService doctorRepository;
+  DoctorService doctorService;
   
   @GetMapping
   public List<Doctor> getAllDoctors() {
-    return doctorRepository.getAll();
+    return doctorService.getAll();
   } 
   
   @GetMapping("/{id}")
   public Doctor getDoctorById(@PathVariable Integer id) {
     try {
-      return doctorRepository.getById(id);
+      return doctorService.getById(id);
     }catch(DoctorNotFoundException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
@@ -37,12 +38,18 @@ public class DoctorController {
   
   @PostMapping
   public Doctor createDoctor(@RequestBody Doctor doctor) {
-    return doctorRepository.create(doctor);
+    return doctorService.create(doctor);
   }
   
   @PostMapping("/{id}")
   public Doctor updateDoctorWithId(@RequestBody Doctor doctor,@PathVariable Integer id) {
     doctor.setDoctorId(id);
-    return doctorRepository.update(doctor);
+    return doctorService.update(doctor);
+  }
+  
+  @GetMapping("/{id}/appointments")
+  public List<Appointment> getAppointmentsByDoctorId(@PathVariable Integer id) {
+    Doctor doctor = this.getDoctorById(id);
+    return doctor.getAppointments();
   }
 }
