@@ -23,6 +23,9 @@ return(
         <NavItem>
           <NavLink  to="/doctorlogin" className="nav-link" activeClassName="active">Doctor</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink  to="/home" className="nav-link" activeClassName="active">home</NavLink>
+        </NavItem>
       
       
 

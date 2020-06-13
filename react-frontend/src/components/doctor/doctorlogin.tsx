@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Row, Col } from "reactstrap";
 
 import { withRouter } from 'react-router-dom'
+import { loginDoctor } from '../../api/apidoctor';
 
 
 export class DoctorLoginComponent extends React.Component<any,any>{
@@ -9,8 +10,8 @@ export class DoctorLoginComponent extends React.Component<any,any>{
 constructor(props:any){
     super(props);
     this.state={
-        username:"joel",
-        password:"1234"
+        username:"",
+        password:""
     }
 
 }
@@ -18,17 +19,37 @@ constructor(props:any){
 
 verifyUser=async(event:any)=>{
     event.preventDefault();
-    //make conditions later
-    this.props.history.push("/doctor/home");
+   
+    try{
+let doctor =await loginDoctor(this.state.username,this.state.password);
+console.log(doctor);
+this.props.history.push("/doctor/home");
+
+
+    }catch(e){
+        // toast("invalid credentials", { type: "error" });
+        console.log(e);
+
+    }
+    // this.props.history.push("/doctor/home");
 
 
 }
 
-setUsername=()=>{
+setUsername=(event:any)=>{
+    let username = event.target.value;
+    this.setState({
+        username: username
+    })
+
 
 }
 
-setPassword=()=>{
+setPassword=(event:any)=>{
+    let password = event.target.value;
+    this.setState({
+        password: password
+    })
 
 }
 

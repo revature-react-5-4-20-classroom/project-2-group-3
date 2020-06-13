@@ -8,13 +8,52 @@ import { HomeNavigationComponent } from './components/HomeNavigation';
 import { PatientHomeComponent } from './components/patients/patienthome';
 import { DoctorLoginComponent, DoctorLoginComponentR } from './components/doctor/doctorlogin';
 import { DoctorHomeComponent } from './components/doctor/doctorHome';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { store } from './redux/store';
+import { ToastContainer } from 'react-toastify';
+import { IState } from './redux/reducers';
+import { loginSaveDoctor, loginSavePatient } from "./redux/action-mappers";
+import { render } from '@testing-library/react';
+import { Doctor } from './models/doctor';
+import { Patient } from './models/patient';
+import { Department } from './models/department';
 
-function App() {
-  return (
+
+export class App extends React.Component<any,any> {
+
+  constructor(props:any){
+
+    super(props);
+     this.state={
+       doctor:null,
+     patient:null
+     }
+  }
+
+
   
-<Provider store={store}>
+   
+
+
+
+
+
+
+
+  render() {
+
+
+
+
+
+
+
+    
+    return(
+
+
+  <>
+
     <Router>
 <Switch>
 <Route path="/patientlogin">
@@ -46,14 +85,39 @@ function App() {
 
 
     </Router>
-    </Provider>
+  
+  
+    <ToastContainer />
+  
+
+</>
 
 
 
 
-
-  );
+)
+// }
+};
   
 }
 
 export default App;
+
+
+const mapStateToProps = (state: IState) => {
+ 
+  return {
+    ...state.loginUser
+  }
+
+}
+
+const mapDispatchToProps = {
+loginSaveDoctor,
+loginSavePatient
+
+
+}
+
+
+export let AppS = connect(mapStateToProps, mapDispatchToProps)(App);

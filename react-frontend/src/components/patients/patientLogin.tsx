@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Container, Row, Col } from "reactstrap";
 
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import { loginpatient } from '../../api/apipatient';
 
 
 export class PatientLoginComponent extends React.Component<any,any>{
@@ -9,8 +11,8 @@ export class PatientLoginComponent extends React.Component<any,any>{
 constructor(props:any){
     super(props);
     this.state={
-        username:"joel",
-        password:"1234"
+        username:"",
+        password:""
     }
 
 }
@@ -18,17 +20,39 @@ constructor(props:any){
 
 verifyUser=async(event:any)=>{
     event.preventDefault();
-    //make conditions later
-    this.props.history.push("/patient/home");
+   
+    try{
+let patient =await loginpatient(this.state.username,this.state.password);
+console.log(patient);
+this.props.history.push("/patient/home");
+
+    }catch(e){
+        // toast("invalid credentials", { type: "error" });
+        console.log(e);
+
+    }
+
+
+  
 
 
 }
 
-setUsername=()=>{
+setUsername=(event:any)=>{
+    let username = event.target.value;
+    this.setState({
+        username: username
+    })
+
+
 
 }
 
-setPassword=()=>{
+setPassword=(event:any)=>{
+    let password = event.target.value;
+    this.setState({
+        password: password
+    })
 
 }
 

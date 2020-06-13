@@ -6,7 +6,10 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { DoctorAppointmentComponent } from "./doctorAppointments";
-import { DoctorNavigationComponent } from "./doctorNavigation";
+import { DoctorNavigationComponent, DoctorNavigationComponentS, DoctorNavigationComponentSW } from "./doctorNavigation";
+import { store } from "../../redux/store";
+import { Provider } from "react-redux";
+import { DoctorLoginComponentR } from "./doctorlogin";
 
 
 
@@ -21,9 +24,10 @@ return(
 
     <>
     <p>DoctorHome</p>
-
+<Provider store={store}>
+    
     <Router>
-    <DoctorNavigationComponent/>
+    <DoctorNavigationComponentSW/>
         <Switch>
             <Route path="/doctor/appointments"> 
         <DoctorAppointmentComponent/>
@@ -49,7 +53,7 @@ patient card
 
 
 
-
+    </Provider>
 
     </>
       

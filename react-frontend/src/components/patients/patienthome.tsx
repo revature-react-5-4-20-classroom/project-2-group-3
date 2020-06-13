@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { PatientNavigationComponent } from "./patientNavigation";
+import { PatientNavigationComponent, PatientNavigationComponentSW } from "./patientNavigation";
 import { PatientAppointmentComponent } from "./patientAppointment";
 import { NewAppointmentComponent } from "./newAppointment";
 
@@ -19,7 +19,7 @@ return(
     <p>PateintHome</p>
 
     <Router>
-        <PatientNavigationComponent/>
+        <PatientNavigationComponentSW/>
         <Switch>
             <Route path="/patient/appointments"> 
            <PatientAppointmentComponent/>

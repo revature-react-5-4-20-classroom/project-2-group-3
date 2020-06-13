@@ -3,6 +3,7 @@ import { Doctor } from "../models/doctor";
 import { Department } from "../models/department";
 import { AnyAction, combineReducers } from "redux";
 import { loginTypes } from "./action-mappers";
+import { LastRecord } from "../models/lastRecord";
 
 interface IUser{
     patient:Patient,

@@ -1,3 +1,4 @@
+import { LastRecord } from "./lastRecord";
 
 
 
@@ -13,6 +14,8 @@ birthDate:number,
 address:string,
 phone:string,
 email:string,
+
+lastRecord?:LastRecord
 
 
 
@@ -31,8 +34,9 @@ export class Patient implements IPatient{
     address: string;
     phone: string;
     email: string;
+    lastRecord?:LastRecord
 
-    constructor(patientId:number,firstName:string,lastName:string,gender:string,username:string,password:string,birthDate:number,address:string,phone:string,email:string){
+    constructor(patientId:number,firstName:string,lastName:string,gender:string,username:string,password:string,birthDate:number,address:string,phone:string,email:string,lastRecord?:LastRecord){
 
 this.patientId=patientId;
 this.firstName=firstName;
@@ -44,6 +48,7 @@ this.birthDate=birthDate;
 this.address=address;
 this.phone=phone;
 this.email=email;
+this.lastRecord=lastRecord;
 
 
         
