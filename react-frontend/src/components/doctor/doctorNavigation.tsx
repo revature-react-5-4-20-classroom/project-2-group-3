@@ -3,7 +3,7 @@ import { Navbar, Nav, NavbarBrand, NavItem, Button } from "reactstrap";
 
 import { NavLink, withRouter } from 'react-router-dom';
 import { IState } from "../../redux/reducers";
-import { loginSaveDoctor } from "../../redux/action-mappers";
+import { loginSaveDoctor,loginSavePatient } from "../../redux/action-mappers";
 import { connect } from "react-redux";
 
 
@@ -16,7 +16,8 @@ export class DoctorNavigationComponent extends React.Component<any,any>{
    
         // console.log(this.props.location.pathname)
         this.props.loginSaveDoctor(null);
-        this.props.history.push("/doctorlogin");
+        this.props.loginSavePatient(null);
+        this.props.history.push("/home");
     
     
       }
@@ -71,7 +72,8 @@ const mapStateToProps = (state: IState) => {
   }
   
   const mapDispatchToProps = {
-loginSaveDoctor
+loginSaveDoctor,
+loginSavePatient
   
   
   }

@@ -42,7 +42,47 @@ export class App extends React.Component<any,any> {
 
   render() {
 
+if(this.props.doctor===null&&this.props.patient===null){
+  return(
+    <Router>
+    <Switch>
+    <Route path="/patientlogin">
+      <PatientLoginComponentR/>
+    </Route>
+    <Route path="/doctorlogin">
+      <DoctorLoginComponentR/>
+    </Route>
+    
+{/*     
+    <Route path="/patient/home">
+    <PatientHomeComponent/>
+    </Route>
+    
+    <Route path="/doctor/home">
+    <DoctorHomeComponent/>
+    </Route> */}
+    
+    <Route path={["/home","*"]}>
+    <HomeNavigationComponent/>
+    <HomePageComponent/>
+    </Route>
+    
+    
+    
+    
+    </Switch>
+    
+    
+    
+        </Router>
 
+
+
+
+
+
+  )
+}
 
 
 

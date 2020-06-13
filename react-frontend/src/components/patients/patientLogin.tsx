@@ -26,6 +26,7 @@ let patient =await loginpatient(this.state.username,this.state.password);
 console.log(patient);
 this.props.history.push("/patient/home");
 
+
     }catch(e){
         // toast("invalid credentials", { type: "error" });
         console.log(e);

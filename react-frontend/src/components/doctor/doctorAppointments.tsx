@@ -12,7 +12,7 @@ render(){
 return(
 
 
-<p>Hellos</p>
+<p>Hellos here will be all the appointments related to him sorted by date</p>
 
 
 )
