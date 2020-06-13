@@ -20,10 +20,15 @@ public class Project2Application {
 	public WebMvcConfigurer corsConfigurer() {
 	  return new WebMvcConfigurer() {
 	    @Override
+//	    public void addCorsMappings(CorsRegistry registry) {
+//	      registry.addMapping("/**").allowedMethods();
+//	    }
+//	  };
+	    
 	    public void addCorsMappings(CorsRegistry registry) {
-	      registry.addMapping("/**").allowedMethods();
-	    }
-	  };
+          registry.addMapping("/**").allowedMethods("GET","POST", "PUT", "PATCH", "DELETE",
+                "OPTIONS").allowedOrigins("*").allowedHeaders("*");
+	}};
 	}
 	
 	@Bean public Docket project2Api() {
