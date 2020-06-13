@@ -1,5 +1,6 @@
 package com.group3.project2.models;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -39,6 +41,10 @@ public class Doctor {
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonIgnoreProperties({"doctors"})
   private Department department;
+  
+  @OneToMany(mappedBy = "doctor")
+  @JsonIgnoreProperties({"doctor"})
+  private List<Appointment> appointments;
   
   public Doctor() {
     super();
@@ -111,7 +117,15 @@ public class Doctor {
   public void setDepartment(Department department) {
     this.department = department;
   }
-
+  
+  public List<Appointment> getAppointments() {
+    return this.appointments;
+  }
+  
+  public void setAppointments(List<Appointment> appointments) {
+    this.appointments = appointments;
+  }
+  
   @Override
   public String toString() {
     return "Doctor [doctorId=" + doctorId + ", firstName=" + firstName + ", lastName=" + lastName
