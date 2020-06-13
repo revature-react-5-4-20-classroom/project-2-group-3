@@ -27,8 +27,8 @@ public class Patient {
   @OneToOne(fetch = FetchType.EAGER)
   private PhysicalRecord lastRecord;
   
-  @OneToMany(mappedBy = "patientId")
-  private List<EContact> eContacts;
+//  @OneToMany(mappedBy = "patientId")
+//  private List<EContact> eContacts;
   
   @Column(name = "first_name")
   private String firstName;

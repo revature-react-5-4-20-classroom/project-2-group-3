@@ -40,4 +40,12 @@ public class PatientService {
       throw new PatientNotFoundException();
     }
   }
+  public Patient checkCredentials(String username,String password) {
+    List<Patient> user= patientRepository.findByUsernameAndPassword(username, password);
+  if(user.size()>0) {
+    return    user.get(0);
+  }else {
+    throw new PatientNotFoundException();
+  }
+  }
 }

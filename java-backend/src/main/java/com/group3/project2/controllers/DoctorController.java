@@ -1,6 +1,7 @@
 package com.group3.project2.controllers;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import com.group3.project2.dtos.Credentials;
 import com.group3.project2.exceptions.DoctorNotFoundException;
 import com.group3.project2.models.Appointment;
 import com.group3.project2.models.Doctor;
@@ -51,5 +53,18 @@ public class DoctorController {
   public List<Appointment> getAppointmentsByDoctorId(@PathVariable Integer id) {
     Doctor doctor = this.getDoctorById(id);
     return doctor.getAppointments();
+  }
+  
+  @PostMapping("/login")
+  public Doctor attemptLogin(@RequestBody Credentials creds,HttpSession session) {
+  
+    try {
+    Doctor doctor=doctorService.checkCredentials(creds.getUsername(),creds.getPassword());
+    return doctor;
+    }
+    catch(DoctorNotFoundException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+      
+    }
   }
 }

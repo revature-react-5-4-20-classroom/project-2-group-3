@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group3.project2.exceptions.DoctorNotFoundException;
+import com.group3.project2.exceptions.PatientNotFoundException;
 import com.group3.project2.models.Doctor;
 import com.group3.project2.repositories.DoctorRepository;
 
@@ -39,5 +40,13 @@ public class DoctorService {
     }else {
       throw new DoctorNotFoundException();
     }
+  }
+  public Doctor checkCredentials(String username,String password) {
+    List<Doctor> user= doctorRepository.findByUsernameAndPassword(username, password);
+  if(user.size()>0) {
+    return    user.get(0);
+  }else {
+    throw new PatientNotFoundException();
+  }
   }
 }
