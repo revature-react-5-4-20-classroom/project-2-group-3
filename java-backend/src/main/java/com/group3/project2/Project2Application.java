@@ -1,5 +1,9 @@
 package com.group3.project2;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,6 +18,11 @@ public class Project2Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Project2Application.class, args);
+	}
+
+	@PostConstruct
+	public void init() {
+	  TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
 	}
 	
 	@Bean
