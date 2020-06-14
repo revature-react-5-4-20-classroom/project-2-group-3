@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PatientNavigationComponent, PatientNavigationComponentSW } from "./patientNavigation";
-import { PatientAppointmentComponent } from "./patientAppointment";
+import { PatientAppointmentComponent, PatientAppointmentComponentW } from "./patientAppointment";
 import { NewAppointmentComponent } from "./newAppointment";
 
 
@@ -22,7 +22,7 @@ return(
         <PatientNavigationComponentSW/>
         <Switch>
             <Route path="/patient/appointments"> 
-           <PatientAppointmentComponent/>
+           <PatientAppointmentComponentW/>
             </Route>
             <Route path="/patient/newappointment">    
 <NewAppointmentComponent/>
