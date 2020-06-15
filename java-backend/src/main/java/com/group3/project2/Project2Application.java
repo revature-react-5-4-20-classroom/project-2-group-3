@@ -22,7 +22,7 @@ public class Project2Application {
 
 	@PostConstruct
 	public void init() {
-	  TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	}
 	
 	@Bean
