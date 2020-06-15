@@ -49,58 +49,11 @@ render(){
 
 
 
-// let isOpen=false;
-//          let toggle=()=>{
-// isOpen=!isOpen;
 
-
-        //   }
 return(
 
     <DisplayDoctorComponent key={doctor.doctorId} doctor={doctor}/>
-//           <div key={doctor.doctorId}>
-//              <Card>
-//                  <CardBody>
-// <ListGroup>
-// <ListGroupItem>
-// Name: {doctor.firstName} {doctor.lastName}
-// </ListGroupItem>
-// <ListGroupItem>
-// Speciality: {doctor.speciality}
-// </ListGroupItem>
 
-
-
-// </ListGroup>
-
-
-
-// <Button className=" mt-1" onClick={toggle} >Make an Appointment</Button>
-
-// <Collapse isOpen={isOpen}>
-// <div>
-
-// hello
-
-
-
-// </div>
-
-
-
-// </Collapse>
-
-
-//                  </CardBody>
-                
-                 
-                 
-//                  </Card> 
-
-
-
-
-//           </div>
 
 
 

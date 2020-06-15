@@ -4,6 +4,7 @@ import React from "react";
 import { Doctor } from "../../models/doctor";
 import { Card, ListGroup, CardBody, ListGroupItem, Button, Collapse } from "reactstrap";
 import { MakeNewAppointmentComponent } from "./makenewAppointment";
+import { EXpNewAppointmentComponent } from "./ExpNewAppointment";
 
 interface IDoctor{
 doctor:Doctor
@@ -57,8 +58,8 @@ Speciality: {this.props.doctor.speciality}
 
 <Collapse isOpen={this.state.isOpen}>
 <div>
-
-<MakeNewAppointmentComponent doctor={this.props.doctor}/>
+<EXpNewAppointmentComponent   doctor={this.props.doctor}/>
+{/* <MakeNewAppointmentComponent doctor={this.props.doctor}/> */}
 
 
 
