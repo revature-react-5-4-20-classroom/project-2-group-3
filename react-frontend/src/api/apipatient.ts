@@ -103,3 +103,28 @@ try{
 }
 
 }
+
+
+//get the emergency record
+export const getEmergency=async(id:number)=>{
+    try{
+        let response=await project2.get(`econtacts/patient/${id}`);
+        return response.data;
+
+    }catch(e){
+        throw e
+    }
+}
+
+//make a new econtact
+export const saveEmergency=async(name:string,address:string,phone:string,relation:string,patientId:Patient)=>{
+    try{
+        let id=0;
+        let response=await project2.post(`/econtacts`,{id,name,address,phone,relation,patientId});
+        console.log(response)
+        return response.data;
+
+    }catch(e){
+        throw e
+    }
+}

@@ -22,7 +22,7 @@ constructor(props:IDisplayProps){
 
 
 componentDidMount=()=>{
-    console.log(this.props.appointments)
+   
     this.setState({
         appoint:this.props.appointments
 

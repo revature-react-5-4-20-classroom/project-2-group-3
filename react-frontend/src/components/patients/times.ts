@@ -11,6 +11,13 @@
 
 switch(date1.getUTCDay()){
 
+    case 3:
+        tomorrow1.setDate(new Date().getDate() + 1);
+        dayafterT1.setDate(new Date().getDate() + 2);
+        dayafterT31.setDate(new Date().getDate() + 5);
+        break;
+  
+  
     case 4:
         tomorrow1.setDate(new Date().getDate() + 1);
         dayafterT1.setDate(new Date().getDate() + 4);
@@ -62,4 +69,4 @@ return[tomorrow,dayafterT,dayafterT3];
 
 }
 
-times();
+

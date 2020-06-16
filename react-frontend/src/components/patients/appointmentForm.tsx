@@ -11,6 +11,7 @@ import { Type } from "../../models/appointmentType";
 import { saveAppointment } from "../../api/apipatient";
 import { withRouter } from "react-router-dom";
 
+
 interface IProps{
     onDisplay:any,
     changeModal:any,
@@ -25,7 +26,8 @@ interface IProps{
 
 interface IModalState{
 details:any,
-type:any
+type:any,
+time:any
 
 
 }
@@ -35,9 +37,31 @@ constructor(props:any){
     super(props)
     this.state={
         details:"",
-        type:1
+        type:1,
+        time:null
     }
 }
+
+
+componentDidMount=()=>{
+    if(this.props.timeslot){
+        this.setState({
+            time:this.props.timeslot
+        })
+    }
+
+}
+
+componentDidUpdate=(prevProps:any)=>{
+    
+    if(prevProps.timeslot!==this.props.timeslot){
+        this.setState({
+            time:this.props.timeslot
+        })
+    }
+
+}
+
 
 changeModal=()=>{
     this.props.changeModal();
@@ -77,6 +101,7 @@ let type=new Type(this.state.type,typename);
 try{
 let response=await saveAppointment(details,dateSlot,timeSlot,doctor,patient,status,type);
 console.log(response);
+this.props.history.push("/patient/appointments");
 }catch(e){
 console.log(e);
 }
@@ -109,8 +134,9 @@ changeType=():string=>{
 
 
     render(){
+    if(this.state.time){
         return(
-<Modal isOpen={this.props.onDisplay}  >
+            <Modal isOpen={this.props.onDisplay}  >
 <Container>
 <Form onSubmit={this.onSubmits}>
 <FormGroup>
@@ -123,8 +149,8 @@ changeType=():string=>{
 <Input type="text" value={this.props.dateslot||""} disabled/>
 </FormGroup>
 <FormGroup>
-<Label>Time:</Label>
-<Input value={this.props.timeslot||""} type="number" disabled/>
+<Label>TimeSlot:</Label>
+{this.props.timeslot}
 </FormGroup>
 <FormGroup>
 <Label>Type:</Label>  
@@ -149,7 +175,16 @@ changeType=():string=>{
 
 
 
+        
         )
+    }
+    else{
+        return(
+            <p>dsfdfd</p>
+        )
+    }
+
+
 
 
     }

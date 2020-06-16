@@ -6,6 +6,7 @@ import { PatientAppointmentComponent, PatientAppointmentComponentW } from "./pat
 import { NewAppointmentComponent, NewAppointmentComponentR } from "./newAppointment";
 import { RecordPatientComponentS } from "./recordpatient";
 import { PatientCardComponentS } from "./patientCard";
+import { EmergencyComponentS } from "./emergency";
 
 
 
@@ -30,7 +31,7 @@ return(
 <NewAppointmentComponentR/>
             </Route>
             <Route path="/patient/emergency">    
-<NewAppointmentComponent/>
+<EmergencyComponentS/>
             </Route>
             <Route path="/patient/record">    
 < RecordPatientComponentS/>

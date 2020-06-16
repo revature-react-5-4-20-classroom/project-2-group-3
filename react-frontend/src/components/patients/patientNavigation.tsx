@@ -47,6 +47,10 @@ return(
       <NavItem>
         <NavLink  to="/patient/record" className="nav-link" activeClassName="active">Record</NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink  to="/patient/emergency" className="nav-link" activeClassName="active">Emergency</NavLink>
+      </NavItem>
+
 
       <NavItem className="float-right" tag={() => { return <Button className="float-right" onClick={this.logoutUser} color="primary" outline>Logout</Button> }} />
     

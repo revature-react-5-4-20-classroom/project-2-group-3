@@ -27,7 +27,28 @@ componentDidMount=()=>{
 
 }
 
+
+// componentDidUpdate=(prevProps:any)=>{
+    
+//     if(prevProps.timeSlot!==this.props.timeSlot){
+        
+//         this.changeView(this.props.timeSlot);
+//     }
+
+// }
+
+// componentWillReceiveProps=(nextProps:any)=>{
+//     if(nextProps.timeSlot!==this.props.timeSlot){
+        
+//         this.changeView(nextProps.timeSlot);
+//     }
+
+
+// }
+
+
 changeView=(timeSlot:number)=>{
+    // console.log(this.state.timeFromTo)
 
     switch(timeSlot){
         case 1:
@@ -36,18 +57,7 @@ changeView=(timeSlot:number)=>{
 
             })
             break;
-            case 1:
-                this.setState({
-                    timeFromTo:"10-10:30 AM"
-    
-                })
-                break;
-                case 1:
-                    this.setState({
-                        timeFromTo:"10-10:30 AM"
-        
-                    })
-                    break;
+          
                     case 2:
                         this.setState({
                             timeFromTo:"10:30-11 AM"

@@ -201,7 +201,7 @@ return 0;
         if (this.state.tomorrow && this.state.dayAfterT) {
             return (
                 <>
-                    <Table>
+                    <Table size="sm">
                         <tbody>
                             <tr>
                                 <th>{this.state.tomorrowDate}</th>
@@ -259,9 +259,12 @@ return 0;
 
                     </Table>
 
+{
+    this.state.timeslot&&
+    <AppointmentModalComponentS onDisplay={this.state.modal} changeModal={this.changeModal} doctor1={this.props.doctor} timeslot={this.state.timeslot} dateslot={this.state.dateslot} />
+}
 
-
-                    <AppointmentModalComponentS onDisplay={this.state.modal} changeModal={this.changeModal} doctor1={this.props.doctor} timeslot={this.state.timeslot} dateslot={this.state.dateslot} />
+                  
 
 
 
