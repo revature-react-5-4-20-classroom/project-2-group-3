@@ -1,10 +1,10 @@
 
 
 import React from "react";
-import { Container, Row, Col, NavItem } from "reactstrap";
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Container, Row, Col, NavItem, ButtonToggle } from "reactstrap";
+import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
-import { DepartmentDoctorsComponent } from "./departmentDoctors";
+import { DepartmentDoctorsComponent, DepartmentDoctorsComponentR } from "./departmentDoctors";
 
 
 
@@ -16,7 +16,38 @@ export class NewAppointmentComponent extends React.Component<any, any>{
 
     constructor(props: any) {
         super(props);
+this.state={
+    change:false,
+    id:null
+}
+    }
 
+    cardio=()=>{
+        this.props.history.push("/patient/newappointment/cardiology")
+        let change=!this.state.change;
+        this.setState({
+            change:change,
+            id:1
+        })
+    }
+
+    neuro=()=>{
+        this.props.history.push("/patient/newappointment/neurology")
+        let change=!this.state.change;
+        this.setState({
+            change:change,
+            id:2
+        })
+    }
+
+
+    uro=()=>{
+        this.props.history.push("/patient/newappointment/urology")
+        let change=!this.state.change;
+        this.setState({
+            change:change,
+            id:3
+        })
     }
 
     render() {
@@ -26,21 +57,24 @@ export class NewAppointmentComponent extends React.Component<any, any>{
 
             <Container fluid>
                 <Row>
-                    <Router>
-                        <Col sm="2" >
+                   
+                        <Col sm="5" >
 
 
                             <nav className="navbar bg-light">
                                 <ul className="navbar-nav">
 
                                     <NavItem>
-                                        <NavLink to="/patient/newappointment/cardiology" className="nav-link " activeClassName="active">Cardiology</NavLink>
+                                       
+                                        <ButtonToggle onClick={this.cardio} outline color="info" className="mb-2" >Cardiology</ButtonToggle>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/patient/newappointment/neurology" className="nav-link " activeClassName="active">Neurology</NavLink>
+                                      
+                                        <ButtonToggle onClick={this.neuro} outline color="info" className="mb-2" >Neurology</ButtonToggle>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/patient/newappointment/urology" className="nav-link " activeClassName="active">urology</NavLink>
+                                    <ButtonToggle onClick={this.uro} outline color="info" className="mb-2" >Urology</ButtonToggle>
+                                        {/* <NavLink to="/patient/newappointment/urology" className="nav-link " activeClassName="active">urology</NavLink> */}
                                     </NavItem>
                                 </ul>
                             </nav>
@@ -49,35 +83,16 @@ export class NewAppointmentComponent extends React.Component<any, any>{
 
                         </Col>
                         <Col sm="10">
+                        
+                        {this.state.id&&
+                        <DepartmentDoctorsComponentR departmentid={this.state.id}/>
+                        }
 
-                            <Switch>
-                                {/* <Route path="/patient/newappointment/cardiology"> */}
+                         </Col>
 
-                                {/* <Route path="/patient/newappointment/cardiology" render={(props)=>{return<DepartmentDoctorsComponent departmentid="1" {...props}/>}}/> */}
+                           
 
-                                <Route path="/patient/newappointment/cardiology">
-
-                                    <DepartmentDoctorsComponent departmentid="1" />
-                                </Route>
-
-                                <Route path="/patient/newappointment/neurology"  >
-
-                                    <DepartmentDoctorsComponent departmentid="2" />
-                                </Route>
-
-
-                                <Route path="/patient/newappointment/urology">
-                                    <DepartmentDoctorsComponent departmentid="3" />
-                                </Route>
-
-
-
-                            </Switch>
-
-
-
-                        </Col>
-                    </Router>
+                  
                 </Row>
             </Container>
 
@@ -94,3 +109,5 @@ export class NewAppointmentComponent extends React.Component<any, any>{
 
 
 }
+
+export let  NewAppointmentComponentR=withRouter( NewAppointmentComponent)

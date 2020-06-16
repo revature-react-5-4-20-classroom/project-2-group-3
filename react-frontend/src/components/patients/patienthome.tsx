@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PatientNavigationComponent, PatientNavigationComponentSW } from "./patientNavigation";
 import { PatientAppointmentComponent, PatientAppointmentComponentW } from "./patientAppointment";
-import { NewAppointmentComponent } from "./newAppointment";
+import { NewAppointmentComponent, NewAppointmentComponentR } from "./newAppointment";
 
 
 
@@ -25,7 +25,7 @@ return(
            <PatientAppointmentComponentW/>
             </Route>
             <Route path="/patient/newappointment">    
-<NewAppointmentComponent/>
+<NewAppointmentComponentR/>
             </Route>
             <Route path="/patient/emergency">    
 <NewAppointmentComponent/>
