@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Card, CardBody, ListGroup, ListGroupItem } from "reactstrap";
 import { Appointment } from "../../models/appointment";
+import { ChangeTimeSlotComponent } from "./changeTimeSlot";
 
 
 
@@ -53,7 +54,7 @@ return(
     Date: {elem.dateSlot}
 </ListGroupItem>
 <ListGroupItem>
-    Time: {elem.timeSlot}
+    Time: <ChangeTimeSlotComponent timeSlot={elem.timeSlot}/>
 </ListGroupItem>
 <ListGroupItem>
 Doctor: {elem.doctor.firstName} {elem.doctor.lastName}

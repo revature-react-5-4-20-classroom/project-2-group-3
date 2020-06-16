@@ -4,6 +4,7 @@ import { Appointment } from "../../models/appointment";
 import { Table, Button, Modal, Form } from "reactstrap";
 import { ChangeTimeSlotComponent } from "./changeTimeSlot";
 import { AppointmentModalComponent, AppointmentModalComponentS } from "./appointmentForm";
+import { times } from "./times";
 
 
 
@@ -61,40 +62,19 @@ export class MakeNewAppointmentComponent extends React.Component<IMakeProp, IMak
 
         let dateutc = Date.UTC(date1.getUTCFullYear(), date1.getUTCMonth(), date1.getUTCDate(),
             date1.getUTCHours(), date1.getUTCMinutes(), date1.getUTCSeconds());
-        let tomorrow1 = new Date(dateutc);
-        tomorrow1.setDate(new Date().getDate() + 1);
 
-        let tomorrow = tomorrow1.toISOString().slice(0, 10);
-
-
-
-
-        let dayafterT1 = new Date();
-
-        dayafterT1 = new Date(dateutc);
-
-
-        dayafterT1.setDate(new Date().getDate() + 2);
-        let dayafterT = dayafterT1.toISOString().slice(0, 10);
-///new 
-let dayafterT31 = new Date();
-dayafterT31= new Date(dateutc);
-
-
-dayafterT31.setDate(new Date().getDate() + 3);
-let dayafterT3 = dayafterT31.toISOString().slice(0, 10);
-
+let [tomorrow,dayafterT,dayafterT3]=times();
         
-        console.log(tomorrow);
-        console.log(dayafterT);
-        console.log(dayafterT3)
+        // console.log(tomorrow);
+        // console.log(dayafterT);
+        // console.log(dayafterT3)
 
         let today1 = new Date();
 
         today1 = new Date(dateutc);
         let today = today1.toISOString().slice(0, 10);
 
-        console.log(today);
+     
 
         let appointments: any[] | undefined = this.props.doctor.appointments;
 
@@ -112,10 +92,9 @@ let dayafterT3 = dayafterT31.toISOString().slice(0, 10);
                
 
                 let appointdate = dates1.toISOString().slice(0, 10);
-                console.log(appointdate);
-                console.log(appointdate === today);
+             
                 let OnTimeSlot = appointment.timeSlot;
-                console.log(appointdate > today);
+                // console.log(appointdate > today);
                 if (appointdate > today) {
 
                     if (appointdate === tomorrow) {
@@ -134,7 +113,7 @@ let dayafterT3 = dayafterT31.toISOString().slice(0, 10);
 
 
                     if (appointdate === dayafterT) {
-                        // dayAfterTO = [];
+                      
 
 
                         dayAfterTO = dayAfterTO.filter((elem: any) => {
@@ -175,8 +154,7 @@ return 0;
 
         }
 
-        console.log(tomorrowO);
-        console.log(dayAfterTO);
+   
         this.setState({
             tomorrow: tomorrowO,
             dayAfterT: dayAfterTO,
@@ -203,7 +181,7 @@ return 0;
     onClicks = (event: any) => {
         let timeSlot = event.target.id; //integer
         let date = event.target.value;
-        console.log(`date ${date}`);
+     
         this.setState({
             timeslot: timeSlot,
             dateslot: date,

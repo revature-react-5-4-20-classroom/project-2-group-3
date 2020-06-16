@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PatientNavigationComponent, PatientNavigationComponentSW } from "./patientNavigation";
 import { PatientAppointmentComponent, PatientAppointmentComponentW } from "./patientAppointment";
 import { NewAppointmentComponent, NewAppointmentComponentR } from "./newAppointment";
+import { RecordPatientComponentS } from "./recordpatient";
+import { PatientCardComponentS } from "./patientCard";
 
 
 
@@ -16,7 +18,7 @@ return(
     
 
     <>
-    <p>PateintHome</p>
+  
 
     <Router>
         <PatientNavigationComponentSW/>
@@ -30,10 +32,14 @@ return(
             <Route path="/patient/emergency">    
 <NewAppointmentComponent/>
             </Route>
+            <Route path="/patient/record">    
+< RecordPatientComponentS/>
+            </Route>
 
 
-            <Route path="*">
-patient card
+
+            <Route path={["/patient/home", "*"]}>
+<PatientCardComponentS/>
             </Route>
 
 

@@ -35,12 +35,19 @@ return(
                   
                
               </NavbarBrand>
+              <NavItem>
+        <NavLink  to="/patient/home" className="nav-link" activeClassName="active">Home</NavLink>
+      </NavItem>
       <NavItem>
         <NavLink  to="/patient/appointments" className="nav-link" activeClassName="active">Appointments</NavLink>
       </NavItem>
       <NavItem>
         <NavLink  to="/patient/newappointment" className="nav-link" activeClassName="active">New Appointment</NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink  to="/patient/record" className="nav-link" activeClassName="active">Record</NavLink>
+      </NavItem>
+
       <NavItem className="float-right" tag={() => { return <Button className="float-right" onClick={this.logoutUser} color="primary" outline>Logout</Button> }} />
     
     

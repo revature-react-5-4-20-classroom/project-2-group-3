@@ -73,7 +73,7 @@ if(this.state.appointment){
             }
             if(!this.state.appointment){
                 return(
-                    <p>None</p>
+                    <p></p>
                 )
             }
  
