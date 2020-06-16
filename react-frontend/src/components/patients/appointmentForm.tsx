@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Modal, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Modal, Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import { Doctor } from "../../models/doctor";
 import { IState } from "../../redux/reducers";
 import { loginSavePatient,loginSaveDoctor} from "../../redux/action-mappers";
@@ -9,6 +9,7 @@ import { ChangeTimeSlotComponent } from "./changeTimeSlot";
 import { Status } from "../../models/appointmentstatus";
 import { Type } from "../../models/appointmentType";
 import { saveAppointment } from "../../api/apipatient";
+import { withRouter } from "react-router-dom";
 
 interface IProps{
     onDisplay:any,
@@ -16,7 +17,8 @@ interface IProps{
     doctor1:any,
     timeslot:number,
     dateslot:any,
-    patient?:any
+    patient?:any,
+    history?:any
     
 }
 
@@ -27,9 +29,9 @@ type:any
 
 
 }
-export class AppointmentModalComponent extends React.Component<IProps,IModalState>{
+export class AppointmentModalComponent extends React.Component<any,any>{
 
-constructor(props:IProps){
+constructor(props:any){
     super(props)
     this.state={
         details:"",
@@ -78,7 +80,8 @@ console.log(response);
 }catch(e){
 console.log(e);
 }
-
+this.changeModal();
+// this.props.history.push("/patient/appointments");
 
 
 
@@ -108,7 +111,7 @@ changeType=():string=>{
     render(){
         return(
 <Modal isOpen={this.props.onDisplay}  >
-
+<Container>
 <Form onSubmit={this.onSubmits}>
 <FormGroup>
 <Label>Details</Label>
@@ -124,23 +127,23 @@ changeType=():string=>{
 <Input value={this.props.timeslot||""} type="number" disabled/>
 </FormGroup>
 <FormGroup>
+<Label>Type:</Label>  
 <Input type="select" value={this.state.type} onChange={this.onChangesType} required>
 <option value="1">Routine Visit</option>
 <option value="2">Office Visit</option>
 <option value="3">Return Visit</option>
 </Input>
-
-
 </FormGroup>
 <Button type="submit">Confirm</Button>
-
+<Button onClick={this.changeModal} className="mt-1 mb-1 ml-1">Cancel</Button>  
 
 
 
 
 </Form>
 
-  <Button onClick={this.changeModal}>Cancel</Button>  
+ 
+  </Container>
 </Modal>
 
 
@@ -169,5 +172,6 @@ loginSaveDoctor
   
   }
   
-  
-  export let AppointmentModalComponentS = connect(mapStateToProps, mapDispatchToProps)(AppointmentModalComponent);
+  export let  AppointmentModalComponentR=withRouter(AppointmentModalComponent);
+  export let AppointmentModalComponentS = connect(mapStateToProps, mapDispatchToProps)(AppointmentModalComponentR);
+

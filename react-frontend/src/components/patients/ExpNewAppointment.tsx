@@ -45,24 +45,24 @@ export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMake
 
 
     makeApointments = () => {
-        let tomorrowO: any =[1,2,3,4,5,6,7,8,9,10];
-        let dayAfterTO: any = [1,2,3,4,5,6,7,8,9,10];
+        let tomorrowO: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let dayAfterTO: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         let tomorrow1 = new Date();
-       
-        let tomorrowutc =  Date.UTC(tomorrow1.getUTCFullYear(), tomorrow1.getUTCMonth(),tomorrow1.getUTCDate(),
-        tomorrow1.getUTCHours(), tomorrow1.getUTCMinutes(), tomorrow1.getUTCSeconds());
-        tomorrow1=new Date(tomorrowutc);
-  tomorrow1.setDate(new Date().getDate() + 1);
-       
-let tomorrow=tomorrow1.toISOString().slice(0,10);
+
+        let tomorrowutc = Date.UTC(tomorrow1.getUTCFullYear(), tomorrow1.getUTCMonth(), tomorrow1.getUTCDate(),
+            tomorrow1.getUTCHours(), tomorrow1.getUTCMinutes(), tomorrow1.getUTCSeconds());
+        tomorrow1 = new Date(tomorrowutc);
+        tomorrow1.setDate(new Date().getDate() + 1);
+
+        let tomorrow = tomorrow1.toISOString().slice(0, 10);
 
 
 
 
         let dayafterT1 = new Date();
-        let dayafterutc =  Date.UTC(dayafterT1.getUTCFullYear(), dayafterT1.getUTCMonth(),dayafterT1.getUTCDate(),
-        dayafterT1.getUTCHours(), dayafterT1.getUTCMinutes(), dayafterT1.getUTCSeconds());
-        dayafterT1=new Date(dayafterutc);
+        let dayafterutc = Date.UTC(dayafterT1.getUTCFullYear(), dayafterT1.getUTCMonth(), dayafterT1.getUTCDate(),
+            dayafterT1.getUTCHours(), dayafterT1.getUTCMinutes(), dayafterT1.getUTCSeconds());
+        dayafterT1 = new Date(dayafterutc);
 
 
         dayafterT1.setDate(new Date().getDate() + 2);
@@ -71,21 +71,21 @@ let tomorrow=tomorrow1.toISOString().slice(0,10);
         console.log(dayafterT);
 
 
-        let appointments: any[] | undefined = this.props.doctor.appointments;
+        let appointments: any[]|undefined = this.props.doctor.appointments;
         let today1 = new Date();
-        let todayutc =  Date.UTC(dayafterT1.getUTCFullYear(), today1.getUTCMonth(),today1.getUTCDate(),
-        today1.getUTCHours(), today1.getUTCMinutes(), today1.getUTCSeconds());
-        today1=new Date(today1);
-       let  today=today1.toISOString().slice(0,10);
-       
-       
-       
-       
-       
-       
-       
-       
-       
+        let todayutc = Date.UTC(dayafterT1.getUTCFullYear(), today1.getUTCMonth(), today1.getUTCDate(),
+            today1.getUTCHours(), today1.getUTCMinutes(), today1.getUTCSeconds());
+        today1 = new Date(today1);
+        let today = today1.toISOString().slice(0, 10);
+
+
+
+
+
+
+
+
+
         console.log(today);
 
         if (appointments) {
@@ -95,7 +95,7 @@ let tomorrow=tomorrow1.toISOString().slice(0,10);
                 let stringDate = appointment.dateSlot.toString();
 
                 let parts = stringDate.split('-');
-//already stored in utc
+                //already stored in utc
                 let dates1 = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
                 // console.log(dates1.toISOString().slice(0,10));
 
@@ -107,15 +107,15 @@ let tomorrow=tomorrow1.toISOString().slice(0,10);
                 if (appointdate > today) {
 
                     if (appointdate === tomorrow) {
-                    
-                      
-                        tomorrowO=tomorrowO.filter((elem:any)=>{
-                            return elem!=OnTimeSlot;
+
+
+                        tomorrowO = tomorrowO.filter((elem: any) => {
+                            return elem != OnTimeSlot;
 
                         })
 
 
-                      
+
 
 
                     }
@@ -124,13 +124,13 @@ let tomorrow=tomorrow1.toISOString().slice(0,10);
                     if (appointdate === dayafterT) {
                         // dayAfterTO = [];
 
-                      
-                            dayAfterTO=dayAfterTO.filter((elem:any)=>{
-                                return elem!=OnTimeSlot;
-                            })
+
+                        dayAfterTO = dayAfterTO.filter((elem: any) => {
+                            return elem != OnTimeSlot;
+                        })
 
 
-                        
+
 
 
                     }

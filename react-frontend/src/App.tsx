@@ -17,6 +17,7 @@ import { render } from '@testing-library/react';
 import { Doctor } from './models/doctor';
 import { Patient } from './models/patient';
 import { Department } from './models/department';
+import { CreateAccountComponent, CreateAccountComponentW } from './components/patients/createAccount';
 
 
 export class App extends React.Component<any,any> {
@@ -46,6 +47,10 @@ if(this.props.doctor===null&&this.props.patient===null){
   return(
     <Router>
     <Switch>
+<Route path="/createaccount">
+<CreateAccountComponentW/>
+</Route>
+
     <Route path="/patientlogin">
       <PatientLoginComponentR/>
     </Route>
@@ -96,6 +101,9 @@ if(this.props.doctor===null&&this.props.patient===null){
 
     <Router>
 <Switch>
+<Route path="/createaccount">
+<CreateAccountComponentW/>
+</Route>
 <Route path="/patientlogin">
   <PatientLoginComponentR/>
 </Route>

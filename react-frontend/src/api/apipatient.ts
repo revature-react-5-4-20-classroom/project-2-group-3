@@ -63,7 +63,7 @@ export const patientAllAppointment=async(patientId:number):Promise<any>=>{
 
 //get all the doctors of a department
 
-export const departmentDoctors=async(id:number)=>{
+export const departmentDoctors=async(id:number):Promise<any>=>{
 
     try{
 
@@ -76,7 +76,7 @@ export const departmentDoctors=async(id:number)=>{
 
 }
 
-export const saveAppointment=async(det:string,dateS:Date,timeS:number,doct:Doctor,pat:Patient,stat:Status,ty:Type)=>{
+export const saveAppointment=async(det:string,dateS:Date,timeS:number,doct:Doctor,pat:Patient,stat:Status,ty:Type):Promise<any>=>{
     try{
         console.log(dateS);
 
@@ -86,4 +86,20 @@ return appointment.data;
     }catch(e){
         throw e;
     }
+}
+
+
+//create a new pateint
+
+export const createPatient=async(firstN:string,lastN:String,gender:string,username:string,password:string,birthD:number,add:string,phone:string,email:string):Promise<any>=>{
+try{
+    let response=await project2.post("/patients",{patientId:0,physicalRecord:null,firstName:firstN,lastName:lastN,gender:gender,username:username,password:password,birthDate:birthD,
+    address:add,phone:phone,email:email});
+    console.log(response.data);
+
+}catch(e){
+
+    throw e;
+}
+
 }

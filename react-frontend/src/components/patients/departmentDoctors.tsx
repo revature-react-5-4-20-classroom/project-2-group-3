@@ -20,7 +20,7 @@ constructor(props:any){
 }
 
 componentDidMount=async()=>{
-console.log(this.props.departmentid)
+
 try{
    let doctors=await departmentDoctors(this.props.departmentid);
    console.log(doctors);

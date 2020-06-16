@@ -26,6 +26,9 @@ return(
         <NavItem>
           <NavLink  to="/home" className="nav-link" activeClassName="active">home</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink  to="/createaccount" className="nav-link" activeClassName="active">Create Account</NavLink>
+        </NavItem>
       
       
 

@@ -27,6 +27,9 @@ return(
             <Route path="/patient/newappointment">    
 <NewAppointmentComponent/>
             </Route>
+            <Route path="/patient/emergency">    
+<NewAppointmentComponent/>
+            </Route>
 
 
             <Route path="*">

@@ -22,7 +22,7 @@ export class ChangeTimeSlotComponent extends React.Component<IProps,IDisState>{
 
 componentDidMount=()=>{
     this.changeView(this.props.timeSlot);
-console.log(this.props.timeSlot);
+// console.log(this.props.timeSlot);
 
 
 }
