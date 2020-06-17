@@ -89,7 +89,7 @@ Type: {elem.type.typeName}
 
       }else{
           return(
-              <p>none</p>
+              <p></p>
           )
       }
 
