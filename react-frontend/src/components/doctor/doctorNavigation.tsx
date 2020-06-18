@@ -41,7 +41,7 @@ return(
         <NavLink  to="/doctor/appointments" className="nav-link" activeClassName="active">View Appointments</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink  to="" className="nav-link" activeClassName="active">New Appointment Later</NavLink>
+        <NavLink  to="/patients" className="nav-link" activeClassName="active">Patients</NavLink>
       </NavItem>
       <NavItem className="float-right" tag={() => { return <Button className="float-right" onClick={this.logoutUser} color="primary" outline>Logout</Button> }} />
     
