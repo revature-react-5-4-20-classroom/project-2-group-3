@@ -18,7 +18,7 @@ public class PhysicalRecord {
   
   @Id
   private Integer appointmentId;
-  @JoinColumn(name = "appointmentId")
+  @JoinColumn(name = "appointment_id")
   @OneToOne(fetch = FetchType.EAGER)
   @MapsId
   private Appointment appointment;

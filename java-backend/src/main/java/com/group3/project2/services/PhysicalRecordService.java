@@ -34,13 +34,17 @@ public class PhysicalRecordService {
   }
 
   public PhysicalRecord create(PhysicalRecord physicalRecord) {
+    System.out.println("LOG 1");
 	Appointment appointment = physicalRecord.getAppointment();
 	physicalRecord.setAppointmentId(appointment.getAppointmentId());
-	System.out.println(physicalRecord);
+	System.out.println("LOG 2");
 	Patient patient = appointment.getPatient();
 	patient.setLastRecord(physicalRecord);
+	System.out.println("LOG 3");
 	PhysicalRecord newPhysicalRecord = physicalRecordRepository.save(physicalRecord);
+	System.out.println("LOG 3.5");
 	patientService.update(patient);
+	System.out.println("LOG 4");
     return newPhysicalRecord;
   }
 
