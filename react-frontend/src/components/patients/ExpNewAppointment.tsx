@@ -4,6 +4,7 @@ import { Appointment } from "../../models/appointment";
 import { Table, Button, Modal, Form } from "reactstrap";
 import { ChangeTimeSlotComponent } from "./changeTimeSlot";
 import { AppointmentModalComponent, AppointmentModalComponentS } from "./appointmentForm";
+import { times, timesexp } from "./times";
 
 
 
@@ -15,7 +16,10 @@ interface IMakeState {
     dayAfterDate: any,
     modal: boolean,
     timeslot: any,
-    dateslot: any
+    dateslot: any,
+    dayAfter3O:any,
+    dayAfter3Date:any,
+    allthedaysandslots:any
 
 }
 
@@ -24,7 +28,12 @@ interface IMakeProp {
 
 }
 
-export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMakeState>{
+
+
+
+
+
+export class  EXpNewAppointmentComponent extends React.Component<IMakeProp, IMakeState>{
     constructor(props: IMakeProp) {
         super(props);
         this.state = {
@@ -34,7 +43,10 @@ export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMake
             dayAfterDate: null,
             modal: false,
             timeslot: null,
-            dateslot: null
+            dateslot: null,
+            dayAfter3O:null,
+             dayAfter3Date:null,
+             allthedaysandslots:null
 
         }
     }
@@ -45,121 +57,85 @@ export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMake
 
 
     makeApointments = () => {
-        let tomorrowO: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let dayAfterTO: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let tomorrow1 = new Date();
+       
+        let date1 = new Date();
+        console.log(date1.getUTCDay());
+        let dateutc = Date.UTC(date1.getUTCFullYear(), date1.getUTCMonth(), date1.getUTCDate(),
+        date1.getUTCHours(), date1.getUTCMinutes(), date1.getUTCSeconds());
+        let today1=new Date(dateutc);
+let today=today1.toISOString().slice(0,10);
 
-        let tomorrowutc = Date.UTC(tomorrow1.getUTCFullYear(), tomorrow1.getUTCMonth(), tomorrow1.getUTCDate(),
-            tomorrow1.getUTCHours(), tomorrow1.getUTCMinutes(), tomorrow1.getUTCSeconds());
-        tomorrow1 = new Date(tomorrowutc);
-        tomorrow1.setDate(new Date().getDate() + 1);
+ let dates:any[]=timesexp();
 
-        let tomorrow = tomorrow1.toISOString().slice(0, 10);
-
-
-
-
-        let dayafterT1 = new Date();
-        let dayafterutc = Date.UTC(dayafterT1.getUTCFullYear(), dayafterT1.getUTCMonth(), dayafterT1.getUTCDate(),
-            dayafterT1.getUTCHours(), dayafterT1.getUTCMinutes(), dayafterT1.getUTCSeconds());
-        dayafterT1 = new Date(dayafterutc);
+        let dateOBjArray:any[]=[];
+        for(let i=0;i<dates.length;i++){
+let obj={date:dates[i],
+    slots:[1,2,3,4,5,6,7,8,9,10]
 
 
-        dayafterT1.setDate(new Date().getDate() + 2);
-        let dayafterT = dayafterT1.toISOString().slice(0, 10);
-        console.log(tomorrow);
-        console.log(dayafterT);
+}
+dateOBjArray.push(obj);
+
+        }
+console.log(dateOBjArray);
+console.log("hello")
+      
+     
+
+        let appointments: any[] | undefined = this.props.doctor.appointments;
 
 
-        let appointments: any[]|undefined = this.props.doctor.appointments;
-        let today1 = new Date();
-        let todayutc = Date.UTC(dayafterT1.getUTCFullYear(), today1.getUTCMonth(), today1.getUTCDate(),
-            today1.getUTCHours(), today1.getUTCMinutes(), today1.getUTCSeconds());
-        today1 = new Date(today1);
-        let today = today1.toISOString().slice(0, 10);
-
-
-
-
-
-
-
-
-
-        console.log(today);
 
         if (appointments) {
-            let newappoint = appointments.map((appointment: Appointment) => {
+             appointments.map((appointment: Appointment) => {
 
-
-                let stringDate = appointment.dateSlot.toString();
+ let stringDate = appointment.dateSlot.toString();
 
                 let parts = stringDate.split('-');
                 //already stored in utc
                 let dates1 = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-                // console.log(dates1.toISOString().slice(0,10));
+               
 
                 let appointdate = dates1.toISOString().slice(0, 10);
-                console.log(appointdate);
-                console.log(appointdate === today);
+             console.log("appointdate"+appointdate);
                 let OnTimeSlot = appointment.timeSlot;
-                console.log(appointdate > today);
+               
                 if (appointdate > today) {
 
-                    if (appointdate === tomorrow) {
+               let datesfilter=dateOBjArray.filter((dateObject)=>{
 
+                if(dateObject.date===appointdate){
 
-                        tomorrowO = tomorrowO.filter((elem: any) => {
-                            return elem != OnTimeSlot;
+                   let newslots= dateObject.slots.filter((elem:any)=>{return elem!==OnTimeSlot})
+                     dateObject.slots=newslots;
 
-                        })
+                    
 
-
-
-
-
-                    }
-
-
-                    if (appointdate === dayafterT) {
-                        // dayAfterTO = [];
-
-
-                        dayAfterTO = dayAfterTO.filter((elem: any) => {
-                            return elem != OnTimeSlot;
-                        })
+                     }
 
 
 
-
-
-                    }
-
-
+               })  
 
 
 
 
                 }
 
+             } )}
 
+             console.log(dateOBjArray);
+             this.setState({
+                 allthedaysandslots:dateOBjArray
+             })
+            
 
-            })
+            }
 
-        }
+        
 
-        console.log(tomorrowO);
-        console.log(dayAfterTO);
-        this.setState({
-            tomorrow: tomorrowO,
-            dayAfterT: dayAfterTO,
-            tomorrowDate: tomorrow,
-            dayAfterDate: dayafterT
-
-
-        })
-
-    }
+                   
+         
 
 
 
@@ -173,7 +149,7 @@ export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMake
     onClicks = (event: any) => {
         let timeSlot = event.target.id; //integer
         let date = event.target.value;
-        console.log(`date ${date}`);
+     
         this.setState({
             timeslot: timeSlot,
             dateslot: date,
@@ -185,76 +161,63 @@ export class EXpNewAppointmentComponent extends React.Component<IMakeProp, IMake
 
 
 
-
+    // <Button id={slots} onClick={this.onClicks} value={this.state.dayAfterDate}><ChangeTimeSlotComponent timeSlot={slots} /></Button>
 
     render() {
 
 
-        if (this.state.tomorrow && this.state.dayAfterT) {
-            return (
-                <>
-                    <Table>
-                        <tbody>
-                            <tr>
-                                <th>{this.state.tomorrowDate}</th>
-                                {this.state.tomorrow.map((slots: any) => {
+if(this.state.allthedaysandslots){
+let alldays=this.state.allthedaysandslots;
+return(
+<>
+    <Table>
+        {alldays.map((days:any)=>{
+            let date=days.date;
+            let slot=days.slots;
+            console.log(slot);
+            return(
+<tr>
+    <td>
+       {date}
+    </td>
+   {slot.map((elem:any)=>{
+return(
+    <td>
+        
+    <Button id={elem} onClick={this.onClicks} value={date}><ChangeTimeSlotComponent timeSlot={elem} /></Button>
+    
+    </td>
+)
 
-                                    return (
-                                        <td key={slots}>
-                                            <Button id={slots} onClick={this.onClicks} value={this.state.tomorrowDate}><ChangeTimeSlotComponent timeSlot={slots} /></Button>
+   })}
+</tr>
 
-
-                                        </td>
-                                    )
-                                })}
-
-
-
-
-                            </tr>
-                            <tr>
-                                <th>{this.state.dayAfterDate}</th>
-                                {this.state.dayAfterT.map((slots: any) => {
-
-                                    return (
-                                        <td key={slots}>
-                                            <Button id={slots} onClick={this.onClicks} value={this.state.dayAfterDate}><ChangeTimeSlotComponent timeSlot={slots} /></Button>
-
-
-                                        </td>
-                                    )
-                                })}
-
-
-                            </tr>
-
-
-                        </tbody>
-
-
-
-                    </Table>
-
-
-
-                    <AppointmentModalComponentS onDisplay={this.state.modal} changeModal={this.changeModal} doctor1={this.props.doctor} timeslot={this.state.timeslot} dateslot={this.state.dateslot} />
-
-
-
-
-
-                </>
             )
 
 
 
 
-        } else {
-            return (
-                <p>Not</p>
-            )
-        }
+        })}
 
-    }
+
+
+    </Table>
+
+   <AppointmentModalComponentS onDisplay={this.state.modal} changeModal={this.changeModal} doctor1={this.props.doctor} timeslot={this.state.timeslot} dateslot={this.state.dateslot} />  
+</>
+
+
+)
+
+
+}else{
+    return(
+        <p>nope</p>
+    )
+}
+
+
+}
+
 
 }

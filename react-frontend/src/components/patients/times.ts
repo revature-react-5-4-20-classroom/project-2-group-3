@@ -70,3 +70,49 @@ return[tomorrow,dayafterT,dayafterT3];
 }
 
 
+export let timesexp=()=>{
+    let date1 = new Date();
+  
+  
+
+
+
+let days=[];
+
+console.log(date1.getUTCDay());
+let dateutc1 = Date.UTC(date1.getUTCFullYear(), date1.getUTCMonth(), date1.getUTCDate(),
+date1.getUTCHours(), date1.getUTCMinutes(), date1.getUTCSeconds());
+let num=20;
+
+for(let i=1;i<=20;i++){
+let date=new Date(dateutc1);
+date.setDate(new Date().getDate() +i);
+if(date.getUTCDay()!==0&&date.getUTCDay()!==6){
+    let datestring=date.toISOString().slice(0, 10);
+    days.push(datestring);
+
+}
+
+
+
+
+
+
+}
+console.log(days)
+
+// let dateOBjArray=[]
+// for(let i=0;i<=14;i++){
+//     let obj={date:days[i],
+//         slots:[1,2,3,4,5,6,7,8,9,10]
+    
+    
+//     }
+//     dateOBjArray.push(obj);
+    
+//             }
+
+
+return days;
+
+}

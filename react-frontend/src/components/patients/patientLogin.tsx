@@ -67,7 +67,7 @@ setPassword=(event:any)=>{
             <div className="row align-items-center justify-content-center " style={{ height: "80%" }}  >
             <div className="login-column">
             <form onSubmit={this.verifyUser} className="form-signin " >
-                <h2 > Please Sign In</h2>
+                <h2 > Please login in</h2>
                 <br/>
                 <div className="form-group">
                     <label><span className="font-weight-bold">UserName:</span><input type="text" className="form-control" value={this.state.username} onChange={this.setUsername} required /></label>
@@ -76,10 +76,12 @@ setPassword=(event:any)=>{
                     <label><span className="font-weight-bold">Password:</span><input type="password" className="form-control" value={this.state.password} onChange={this.setPassword} required /></label>
                 </div>
                 {/* <button className="btn btn-primary" type="submit">Login</button> */}
-                <Button color="primary" className="btn-block">Login</Button>
+                <Button color="primary" className="btn btn-primary">Login</Button>
             </form>
             </div>
+            <ToastContainer/>
             </div>
+
 
 
 
