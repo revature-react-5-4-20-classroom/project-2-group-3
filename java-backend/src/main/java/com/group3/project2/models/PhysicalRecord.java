@@ -63,71 +63,81 @@ public class PhysicalRecord {
     // TODO Auto-generated constructor stub
   }
 
-  public Integer getPhysicalRecordId() {
-    return appointmentId;
-  }
+  
 
-  public void setPhysicalRecordId(Integer appointmentId) {
-    this.appointmentId = appointmentId;
-  }
+public Integer getAppointmentId() {
+	return appointmentId;
+}
 
-  public Double getHeight() {
-    return height;
-  }
+public void setAppointmentId(Integer appointmentId) {
+	this.appointmentId = appointmentId;
+}
 
-  public void setHeight(Double height) {
-    this.height = height;
-  }
+public Appointment getAppointment() {
+	return appointment;
+}
 
-  public Double getWeight() {
-    return weight;
-  }
+public void setAppointment(Appointment appointment) {
+	this.appointment = appointment;
+}
 
-  public void setWeight(Double weight) {
-    this.weight = weight;
-  }
+public Double getHeight() {
+	return height;
+}
 
-  public Integer getAge() {
-    return age;
-  }
+public void setHeight(Double height) {
+	this.height = height;
+}
 
-  public void setAge(Integer age) {
-    this.age = age;
-  }
+public Double getWeight() {
+	return weight;
+}
 
-  public String getDiagnosis() {
-    return diagnosis;
-  }
+public void setWeight(Double weight) {
+	this.weight = weight;
+}
 
-  public void setDiagnosis(String diagnosis) {
-    this.diagnosis = diagnosis;
-  }
+public Integer getAge() {
+	return age;
+}
 
-  public String getPrescribedAction() {
-    return prescribedAction;
-  }
+public void setAge(Integer age) {
+	this.age = age;
+}
 
-  public void setPrescribedAction(String prescribedAction) {
-    this.prescribedAction = prescribedAction;
-  }
+public String getDiagnosis() {
+	return diagnosis;
+}
 
-  public String getPrescribedMedication() {
-    return prescribedMedication;
-  }
+public void setDiagnosis(String diagnosis) {
+	this.diagnosis = diagnosis;
+}
 
-  public void setPrescribedMedication(String prescribedMedication) {
-    this.prescribedMedication = prescribedMedication;
-  }
+public String getPrescribedAction() {
+	return prescribedAction;
+}
 
-  public String getNotes() {
-    return notes;
-  }
+public void setPrescribedAction(String prescribedAction) {
+	this.prescribedAction = prescribedAction;
+}
 
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
+public String getPrescribedMedication() {
+	return prescribedMedication;
+}
 
-  @Override
+public void setPrescribedMedication(String prescribedMedication) {
+	this.prescribedMedication = prescribedMedication;
+}
+
+public String getNotes() {
+	return notes;
+}
+
+public void setNotes(String notes) {
+	this.notes = notes;
+}
+
+@Override
   public String toString() {
     return "PhysicalRecord [appointmentId=" + appointmentId + ", height=" + height + ", weight="
         + weight + ", age=" + age + ", diagnosis=" + diagnosis + ", prescribedAction="
