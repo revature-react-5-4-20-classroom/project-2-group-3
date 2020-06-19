@@ -31,7 +31,7 @@ this.onChange();
 
       onChange=async()=>{
         if(this.props.patient&&this.props.patient.patientId!=0){
-
+console.log(this.props.patient);
             try{
                 let response=await getEmergency(this.props.patient.patientId);
                 console.log(response);

@@ -56,6 +56,7 @@ onPhone=(event:any)=>{let x=event.target.value; this.setState({phone:x})}
 onSubmits=async(event:any)=>{
     event.preventDefault();
     try{
+        console.log(this.props.patient);
         let response=await saveEmergency(this.state.name,this.state.address,this.state.phone,this.state.relation,this.props.patient);
 console.log(response);
 this.changepropmodal();

@@ -10,7 +10,7 @@ import { Type } from '../models/appointmentType';
 
 
 export const project2 = axios .create({
-    baseURL: 'http://localhost:8080/',
+    baseURL: 'http://localhost:1235/',
 
     // baseURL: "localhost:8080/",
     // If you don't have the following line, your login won't work!
@@ -119,6 +119,7 @@ export const getEmergency=async(id:number)=>{
 //make a new econtact
 export const saveEmergency=async(name:string,address:string,phone:string,relation:string,patientId:Patient)=>{
     try{
+        console.log(patientId)
         let id=0;
         let response=await project2.post(`/econtacts`,{id,name,address,phone,relation,patientId});
         console.log(response)
