@@ -1,4 +1,5 @@
 import { Department } from "./department";
+import { Appointment } from "./appointment";
 
 
 
@@ -11,7 +12,8 @@ lastName:string,
 speciality:string,
 username:string,
 password:string,
-department:Department
+department:Department,
+appointments?:Appointment[]
 
 }
 
@@ -25,12 +27,13 @@ speciality:string;
 username:string;
 password:string;
 department:Department;
+appointments?:Appointment[]
 
 
 
 
 
-constructor(doctorId:number,firstName:string,lastName:string,speciality:string,username:string,password:string,department:Department){
+constructor(doctorId:number,firstName:string,lastName:string,speciality:string,username:string,password:string,department:Department,appointments?:Appointment[]){
     this.doctorId=doctorId;
     this.firstName=firstName;
     this.lastName=lastName;
@@ -38,6 +41,7 @@ constructor(doctorId:number,firstName:string,lastName:string,speciality:string,u
     this.username=username;
     this.password=password;
     this.department=department;
+    this.appointments=appointments
 
 
 }

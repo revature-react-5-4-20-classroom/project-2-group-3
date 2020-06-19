@@ -2,8 +2,11 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PatientNavigationComponent, PatientNavigationComponentSW } from "./patientNavigation";
-import { PatientAppointmentComponent } from "./patientAppointment";
-import { NewAppointmentComponent } from "./newAppointment";
+import { PatientAppointmentComponent, PatientAppointmentComponentW } from "./patientAppointment";
+import { NewAppointmentComponent, NewAppointmentComponentR } from "./newAppointment";
+import { RecordPatientComponentS } from "./recordpatient";
+import { PatientCardComponentS } from "./patientCard";
+import { EmergencyComponentS } from "./emergency";
 
 
 
@@ -16,21 +19,28 @@ return(
     
 
     <>
-    <p>PateintHome</p>
+  
 
     <Router>
         <PatientNavigationComponentSW/>
         <Switch>
             <Route path="/patient/appointments"> 
-           <PatientAppointmentComponent/>
+           <PatientAppointmentComponentW/>
             </Route>
             <Route path="/patient/newappointment">    
-<NewAppointmentComponent/>
+<NewAppointmentComponentR/>
+            </Route>
+            <Route path="/patient/emergency">    
+<EmergencyComponentS/>
+            </Route>
+            <Route path="/patient/record">    
+< RecordPatientComponentS/>
             </Route>
 
 
-            <Route path="*">
-patient card
+
+            <Route path={["/patient/home", "*"]}>
+<PatientCardComponentS/>
             </Route>
 
 

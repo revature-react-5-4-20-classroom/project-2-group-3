@@ -4,7 +4,7 @@ import { Patient } from "./patient";
 
 
 
-export class econtact {
+export class Econtact {
 
 
 name:string;

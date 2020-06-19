@@ -10,6 +10,8 @@ import { DoctorNavigationComponent, DoctorNavigationComponentS, DoctorNavigation
 import { store } from "../../redux/store";
 import { Provider } from "react-redux";
 import { DoctorLoginComponentR } from "./doctorlogin";
+import { PatientListComponent, PatientListComponentR } from "./patientList";
+import { DoctorNewAppointment, DoctorNewAppointmentR } from "./doctorNewAppointment";
 
 
 
@@ -32,10 +34,13 @@ return(
             <Route path="/doctor/appointments"> 
         <DoctorAppointmentComponent/>
             </Route>
-            <Route path="/patient/newappointment">    
-
+            <Route path="/patients/newappointment">
+                <DoctorNewAppointmentR />
             </Route>
-
+            <Route path="/patients">    
+                <PatientListComponentR/>
+            </Route>
+            
 
             <Route path="*">
 patient card

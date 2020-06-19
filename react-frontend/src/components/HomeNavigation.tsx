@@ -17,21 +17,25 @@ return(
                     
                  
                 </NavbarBrand>
+                <NavItem>
+          <NavLink  to="/home" className="nav-link" activeClassName="active">home</NavLink>
+        </NavItem>
         <NavItem>
           <NavLink  to="/patientlogin" className="nav-link" activeClassName="active">Patient</NavLink>
         </NavItem>
         <NavItem>
           <NavLink  to="/doctorlogin" className="nav-link" activeClassName="active">Doctor</NavLink>
         </NavItem>
+       
         <NavItem>
-          <NavLink  to="/home" className="nav-link" activeClassName="active">home</NavLink>
+          <NavLink  to="/createaccount" className="nav-link" activeClassName="active">Create Account</NavLink>
         </NavItem>
       
       
 
 
       </Nav>
-      {/* <NavItem className="float-right" tag={() => { return <Button className="float-right" onClick={this.logoutUser} color="primary" outline>Logout</Button> }} /> */}
+   
     </Navbar>
 
 

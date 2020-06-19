@@ -23,7 +23,7 @@ verifyUser=async(event:any)=>{
    
     try{
 let doctor =await loginDoctor(this.state.username,this.state.password);
-console.log(doctor);
+//console.log(doctor);
 this.props.history.push("/doctor/home");
 
 
