@@ -12,15 +12,20 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(schema = "projecttwo", name = "physicalrecord")
 public class PhysicalRecord {
   
   @Id
   private Integer appointmentId;
-  @JoinColumn(name = "appointment_id")
+  
+  
   @OneToOne(fetch = FetchType.EAGER)
   @MapsId
+  @JsonIgnoreProperties(value={"patient"},allowSetters = true)
   private Appointment appointment;
   
   @Column(name = "height")

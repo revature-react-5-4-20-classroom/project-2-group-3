@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.group3.project2.exceptions.PhysicalRecordAlreadyExists;
 import com.group3.project2.exceptions.PhysicalRecordNotFoundException;
 import com.group3.project2.models.Appointment;
 import com.group3.project2.models.Patient;
@@ -34,18 +36,21 @@ public class PhysicalRecordService {
   }
 
   public PhysicalRecord create(PhysicalRecord physicalRecord) {
-    System.out.println("LOG 1");
+	Optional<PhysicalRecord> existingPhysical = physicalRecordRepository.findById(physicalRecord.getAppointmentId());
+	if(existingPhysical.isPresent()) {
+		throw new PhysicalRecordAlreadyExists();
+	}else {
 	Appointment appointment = physicalRecord.getAppointment();
+	System.out.println(appointment);
 	physicalRecord.setAppointmentId(appointment.getAppointmentId());
-	System.out.println("LOG 2");
+	System.out.println(physicalRecord);
 	Patient patient = appointment.getPatient();
 	patient.setLastRecord(physicalRecord);
-	System.out.println("LOG 3");
 	PhysicalRecord newPhysicalRecord = physicalRecordRepository.save(physicalRecord);
-	System.out.println("LOG 3.5");
 	patientService.update(patient);
-	System.out.println("LOG 4");
     return newPhysicalRecord;
+	}
+	
   }
 
   public PhysicalRecord update(PhysicalRecord physicalRecord) {
