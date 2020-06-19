@@ -1,9 +1,10 @@
+import { Appointment } from "./appointment";
 
 
 
 
 export interface ILastRecord{
-physicalRecordId:number,
+appointmentId:number,
 height:number,
 weight:number,
 age:number;
@@ -11,7 +12,7 @@ diagnosis:string,
 prescribedAction:string,
 prescribedMedication:string,
 notes:string,
-
+appointment? : Appointment
 
 
 
@@ -20,7 +21,7 @@ notes:string,
 
 
 export class LastRecord implements ILastRecord{
-    physicalRecordId: number;
+    appointmentId: number;
     height: number;
     weight: number;
     age: number;
@@ -28,10 +29,11 @@ export class LastRecord implements ILastRecord{
     prescribedAction: string;
     prescribedMedication: string;
     notes: string;
+    appointment? : Appointment
 
-constructor(phsicalRecordId:number,height:number,weight:number,age:number,diagnosis:string,prescribedAction:string,prescribedMedication:string,notes:string){
+constructor(phsicalRecordId:number,height:number,weight:number,age:number,diagnosis:string,prescribedAction:string,prescribedMedication:string,notes:string,appointment?:Appointment){
 
-    this.physicalRecordId=phsicalRecordId;
+    this.appointmentId=phsicalRecordId;
     this.height=height;
     this.weight=weight;
     this.age=age;
@@ -39,7 +41,7 @@ constructor(phsicalRecordId:number,height:number,weight:number,age:number,diagno
     this.prescribedAction=prescribedAction
     this.prescribedMedication=prescribedMedication
     this.notes=notes;
-
+    this.appointment=appointment;
 
 }
 
