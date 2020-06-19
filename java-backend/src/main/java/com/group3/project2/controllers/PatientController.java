@@ -68,7 +68,8 @@ public class PatientController {
   //This is called for a NEW subscriber request. Ie, the Patient has a null field for notificationARN in db. 
   //This calls the notificationService to create a new topic with a name generated from the patients full name and patientId.
   //newTopic returns the new topic ARN (basically its AWS ID) 
-  //Then it calls setSubscriber to have SNS send an email to the patient's email for AWS SNS alert confirmation. 
+  //Then it calls setSubscriber to have SNS send an email to the patient's email for AWS SNS alert confirmation.
+  //Finally, this method updates the patient with the ARN for their new topic
   @PostMapping("/newSub")
   public Patient newSub(@RequestBody Patient patient) {
     String arn = notificationService.newTopic(patient.getFirstName()+patient.getLastName()+patient.getPatientId());
