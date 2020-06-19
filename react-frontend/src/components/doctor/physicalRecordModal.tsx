@@ -1,10 +1,11 @@
 import React from 'react';
-import { Modal, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Modal, Container, Form, FormGroup, Label, Input, ModalFooter, Button } from 'reactstrap';
 import { LastRecord } from '../../models/lastRecord';
+import { updatePhysicalRecord } from '../../api/apidoctor';
 
 interface PhysicalRecordModalProps {
     isOpen : boolean;
-    lastRecord : LastRecord;
+    lastRecord : any ;
     toggleModal : () => void;
 }
 
@@ -73,11 +74,38 @@ export class PhysicalRecordModal extends React.Component<PhysicalRecordModalProp
         })
     }
 
+    modifyPhysicalRecord = async (event:any) => {
+        event.preventDefault();
+        let updatedLastrecord = this.props.lastRecord
+        if(this.state.age){
+            updatedLastrecord.age = Number(this.state.age);
+        }
+        if(this.state.weight){
+            updatedLastrecord.weight = Number(this.state.weight);
+        }
+        if(this.state.height){
+            updatedLastrecord.height = Number(this.state.height);
+        }
+        if(this.state.diagnosis){
+            updatedLastrecord.diagnosis = this.state.diagnosis;
+        }
+        if(this.state.prescribedAction){
+            updatedLastrecord.prescribedAction = this.state.prescribedAction;
+        }
+        if(this.state.prescribedMedication){
+            updatedLastrecord.prescribedMedication = this.state.prescribedMedication;
+        }
+        if(this.state.notes){
+            updatedLastrecord.notes = this.state.notes;
+        }
+        await updatePhysicalRecord(updatedLastrecord)
+    }
+
     render() {
         return (
             <Modal isOpen={this.props.isOpen} toggle={this.props.toggleModal}>
                 <Container>
-                    <Form>
+                    <Form onSubmit={this.modifyPhysicalRecord}>
                     <FormGroup>
                             <Label>Age</Label>
                             <Input onChange={this.setAge} value={this.state.age} type="number" placeholder={this.props.lastRecord.age.toString()}></Input>
@@ -106,6 +134,10 @@ export class PhysicalRecordModal extends React.Component<PhysicalRecordModalProp
                             <Label>Notes</Label>
                             <Input onChange={this.setNotes} value={this.state.notes} type="textarea" placeholder={this.props.lastRecord.notes}/>
                         </FormGroup>
+                        <ModalFooter>
+                            <Button type="submit">Update</Button>
+                            <Button onClick={this.props.toggleModal}>Cancel</Button>
+                        </ModalFooter>
                     </Form>
                 </Container>
             </Modal>

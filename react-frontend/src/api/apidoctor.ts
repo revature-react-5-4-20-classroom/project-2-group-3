@@ -38,7 +38,7 @@ export const getAppointments = async(id:number) : Promise<Appointment[]>=> {
             const doctor : Doctor = new Doctor(app.doctor.doctorId,app.doctor.firstName,app.doctor.lastName,app.doctor.speciality,app.doctor.username,app.doctor.password,department);
             let patient : Patient;
             if(app.patient.lastRecord){ 
-                const lastRecord : LastRecord = new LastRecord(app.patient.lastRecord.physicalRecordId,app.patient.lastRecord.height,app.patient.lastRecord.weight,app.patient.lastRecord.age,app.patient.lastRecord.diagnosis,app.patient.lastRecord.prescribedAction,app.patient.lastRecord.prescribedMedication,app.patient.lastRecord.notes);
+                const lastRecord : LastRecord = new LastRecord(app.patient.lastRecord.appointmentId,app.patient.lastRecord.height,app.patient.lastRecord.weight,app.patient.lastRecord.age,app.patient.lastRecord.diagnosis,app.patient.lastRecord.prescribedAction,app.patient.lastRecord.prescribedMedication,app.patient.lastRecord.notes);
                 patient = new Patient(app.patient.patientId,app.patient.firstName,app.patient.lastName,app.patient.gender,app.patient.username,app.patient.password,app.patient.birthDate,app.patient.address,app.patient.phone,app.patient.email,lastRecord)
             }else{
                 patient = new Patient(app.patient.patientId,app.patient.firstName,app.patient.lastName,app.patient.gender,app.patient.username,app.patient.password,app.patient.birthDate,app.patient.address,app.patient.phone,app.patient.email)
@@ -72,13 +72,31 @@ export const getPatients = async () : Promise<Patient[]> => {
         return response.data.map( (patient:any) => {
             let newPatient: Patient;
             if(patient.lastRecord){ 
-                const lastRecord : LastRecord = new LastRecord(patient.lastRecord.physicalRecordId,patient.lastRecord.height,patient.lastRecord.weight,patient.lastRecord.age,patient.lastRecord.diagnosis,patient.lastRecord.prescribedAction,patient.lastRecord.prescribedMedication,patient.lastRecord.notes);
+                const lastRecord : LastRecord = new LastRecord(patient.lastRecord.appointmentId,patient.lastRecord.height,patient.lastRecord.weight,patient.lastRecord.age,patient.lastRecord.diagnosis,patient.lastRecord.prescribedAction,patient.lastRecord.prescribedMedication,patient.lastRecord.notes);
                 newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email,lastRecord)
             }else{
                 newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email)
             }
             return newPatient;
         })
+    }catch(e){
+        throw e;
+    }
+}
+
+export const updatePhysicalRecord = async (lastRecord:LastRecord|undefined) : Promise<void> => {
+    try{
+        if(lastRecord){
+            let response = await project2.post(`/physicals/${lastRecord.appointmentId}`,lastRecord)
+        }
+    }catch(e){
+        throw e;
+    }
+}
+
+export const createAppointment = async (appointment:Appointment) => {
+    try{
+        let response = await project2.post("/appointments",appointment)
     }catch(e){
         throw e;
     }

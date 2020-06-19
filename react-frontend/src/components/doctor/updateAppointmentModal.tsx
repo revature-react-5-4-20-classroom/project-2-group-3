@@ -115,10 +115,10 @@ export class UpdateAppointmentModal extends React.Component<UpdateAppointmentMod
         await updateAppointments(app);
         this.props.changeAppointments();
         if(this.state.diagnosis || this.state.height || this.state.notes || this.state.prescribedAction || this.state.prescribedMedication || this.state.weight || this.state.age){
-            let record = new LastRecord(app.appointmentId,this.state.height,this.state.weight,this.state.age,this.state.diagnosis,this.state.prescribedAction,this.state.prescribedMedication,this.state.notes);
+            let record = new LastRecord(app.appointmentId,this.state.height,this.state.weight,this.state.age,this.state.diagnosis,this.state.prescribedAction,this.state.prescribedMedication,this.state.notes,app);
+            console.log(record)
             await createPhysicalRecord(record);
         }
-        this.props.toggleModal();
         
 
     }

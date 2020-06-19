@@ -3,10 +3,13 @@ import { Container, Row, Col, Card, CardBody, ListGroup, ListGroupItem, Uncontro
 import { Patient } from '../../models/patient';
 import { getPatients } from '../../api/apidoctor';
 import { PhysicalRecordModal } from './physicalRecordModal';
+import {withRouter} from "react-router-dom"
+import { LastRecord } from '../../models/lastRecord';
 
 interface PatientListComponentState {
     patients : Patient[];
     isOpen : boolean;
+    index : number;
 }
 export class PatientListComponent extends React.Component<any,PatientListComponentState> {
     constructor(props:any){
@@ -14,6 +17,7 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
         this.state = {
             patients : [],
             isOpen : false,
+            index : 0,
         }
     }   
     
@@ -29,8 +33,23 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
         })
     }
 
+    makeModal = (event:any) => {
+        this.setState({
+            index : event.target.value
+        })
+        this.toggleModal()
+    }
+    routeAppointment = () => {
+        this.props.history.push({
+            pathname: "/patients/newappointment",
+            state : {
+                patient : this.state.patients[0]
+            }
+        })
+    }
+
     showPatients = () => {
-        return this.state.patients.map( (patient) => {
+        return this.state.patients.map( (patient,index) => {
             let patientFullName = `${patient.firstName} ${patient.lastName}`;
             return (
                 <div>
@@ -63,11 +82,12 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
                                         Address: {patient.address}
                                     </ListGroupItem>
                                 </ListGroup> 
-                                {patient.lastRecord ? <Button color="info" onClick={this.toggleModal}>More</Button> : <></>}
+                                {patient.lastRecord ? <Button value={index} color="info" onClick={this.makeModal}>More</Button> : <></>}
+                                <Button onClick={this.routeAppointment}>Make Appointment</Button>
                             </CardBody>
                         </Card>
                     </Col>
-                    {this.state.isOpen && patient.lastRecord ? <PhysicalRecordModal lastRecord={patient.lastRecord} isOpen={this.state.isOpen} toggleModal={this.toggleModal}/> : <></>}
+                    {this.state.isOpen && patient.lastRecord ? <PhysicalRecordModal lastRecord={this.state.patients[this.state.index].lastRecord} isOpen={this.state.isOpen} toggleModal={this.toggleModal}/> : <></>}
                 </div>
             )
         })
@@ -83,3 +103,5 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
         )
     }
 }
+
+export const PatientListComponentR = withRouter(PatientListComponent);
