@@ -20,7 +20,7 @@ public class PhysicalRecordController {
   
   @Autowired
   PhysicalRecordService physicalRecordService;
-  /*
+  
   @GetMapping
   public List<PhysicalRecord> getAllPhysicalRecords() {
     return physicalRecordService.getAll();
@@ -42,8 +42,8 @@ public class PhysicalRecordController {
 
   @PostMapping("/{id}")
   public PhysicalRecord updatePhysicalRecordWithId(@RequestBody PhysicalRecord physicalRecord,@PathVariable Integer id) {
-    physicalRecord.setPhysicalRecordId(id);
+    physicalRecord.setAppointmentId(id);
     return physicalRecordService.update(physicalRecord);
   }
-  */
+  
 }
