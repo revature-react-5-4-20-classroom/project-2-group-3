@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group3.project2.exceptions.AppointmentNotFoundException;
 import com.group3.project2.models.Appointment;
+import com.group3.project2.models.Patient;
 import com.group3.project2.repositories.AppointmentRepository;
 
 @Service
@@ -29,6 +30,7 @@ public class AppointmentService {
   
   public Appointment create(Appointment app) {
     app.setAppointmentId(0);
+//    System.out.println(app.getDateSlot());
     return appointmentRepository.save(app);
   }
   
@@ -40,4 +42,5 @@ public class AppointmentService {
       throw new AppointmentNotFoundException();
     }
   }
+
 }

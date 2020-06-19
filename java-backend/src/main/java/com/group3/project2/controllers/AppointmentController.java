@@ -37,6 +37,7 @@ public class AppointmentController {
   
   @PostMapping
   public Appointment createAppointment(@RequestBody Appointment app) {
+    System.out.println(app.getDateSlot());
     return appointmentService.create(app);
   }
   

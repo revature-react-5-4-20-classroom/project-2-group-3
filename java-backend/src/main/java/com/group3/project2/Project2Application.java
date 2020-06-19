@@ -2,7 +2,9 @@ package com.group3.project2;
 
 import java.util.TimeZone;
 
+
 import javax.annotation.PostConstruct;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +22,11 @@ public class Project2Application {
 		SpringApplication.run(Project2Application.class, args);
 	}
 
+	@PostConstruct
+	public void init() {
+	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
+	
 	@PostConstruct
 	public void init() {
 	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));

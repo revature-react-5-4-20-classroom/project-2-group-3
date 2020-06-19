@@ -41,4 +41,10 @@ public class EContactService {
     }
   }
   
+  public List<EContact> getByPatientJ(Integer patientId){
+    List <EContact> eContact=eContactRepository.findByPatientIdJ(patientId);
+    return eContact;
+    
+  }
+  
 }
