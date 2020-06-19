@@ -174,7 +174,7 @@ public class Patient {
   }
 
   public void setARN(String arn) {
-    this.email = arn;
+    this.topicARN = arn;
   }
 
   @Override
