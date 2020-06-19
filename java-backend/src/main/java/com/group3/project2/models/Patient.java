@@ -57,12 +57,15 @@ public class Patient {
   @Column(name = "email")
   private String email;
   
+  @Column(name = "notificationarn")
+  private String topicARN;
+  
   public Patient() {
     super();
   }
 
   public Patient(Integer patientId, PhysicalRecord lastrecord,String firstName, String lastName, String gender,
-      String username, String password, Date birthdate, String address, String phone, String email) {
+      String username, String password, Date birthdate, String address, String phone, String email, String notificationarn) {
     super();
     this.patientId = patientId;
     this.lastRecord = lastrecord;
@@ -75,6 +78,7 @@ public class Patient {
     this.address = address;
     this.phone = phone;
     this.email = email;
+    this.topicARN = notificationarn;
   }
 
   public Integer getPatientId() {
@@ -164,12 +168,20 @@ public class Patient {
   public void setEmail(String email) {
     this.email = email;
   }
+  
+  public String getARN() {
+    return topicARN;
+  }
+
+  public void setARN(String arn) {
+    this.email = arn;
+  }
 
   @Override
   public String toString() {
     return "Patient [patientId=" + patientId + ", lastRecord=" + lastRecord + ", firstName="
         + firstName + ", lastName=" + lastName + ", gender=" + gender + ", username=" + username
         + ", password=" + password + ", birthDate=" + birthDate + ", address=" + address
-        + ", phone=" + phone + ", email=" + email + "]";
+        + ", phone=" + phone + ", email=" + email + ", topicARN="+topicARN +"]";
   }
 }
