@@ -27,10 +27,7 @@ public class Project2Application {
 	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	}
 	
-	@PostConstruct
-	public void init() {
-	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-	}
+
 	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
