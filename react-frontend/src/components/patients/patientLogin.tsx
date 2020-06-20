@@ -3,7 +3,8 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import { withRouter } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
-import { loginpatient } from '../../api/apipatient';
+import { loginpatient, newPatientSub, newAlert } from '../../api/apipatient';
+import { Patient } from '../../models/patient';
 
 
 export class PatientLoginComponent extends React.Component<any,any>{
@@ -22,13 +23,24 @@ verifyUser=async(event:any)=>{
     event.preventDefault();
    
     try{
-let patient =await loginpatient(this.state.username,this.state.password);
+let patient:Patient =await loginpatient(this.state.username,this.state.password);
 console.log(patient);
+console.log(patient.arn);
+
+// let res=await newAlert(patient,"hello","me for");
+
+if(patient.arn===null||patient.arn===undefined){
+    let response=await  newPatientSub(patient);
+    console.log("hi")
+
+}
+
+
 this.props.history.push("/patient/home");
 
 
     }catch(e){
-        // toast("invalid credentials", { type: "error" });
+        toast("invalid credentials", { type: "error" });
         console.log(e);
 
     }
