@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.amazonaws.services.sns.model.PublishResult;
+import com.group3.project2.dtos.Alert;
 import com.group3.project2.dtos.Credentials;
 import com.group3.project2.exceptions.PatientNotFoundException;
 import com.group3.project2.models.Patient;
@@ -72,6 +73,8 @@ public class PatientController {
   //Finally, this method updates the patient with the ARN for their new topic
   @PostMapping("/newSub")
   public Patient newSub(@RequestBody Patient patient) {
+	  System.out.println("fix");
+	  System.out.println(patient);
     String arn = notificationService.newTopic(patient.getFirstName()+patient.getLastName()+patient.getPatientId());
     notificationService.setSubscriber(arn, patient.getEmail());
     patient.setARN(arn);
@@ -81,8 +84,11 @@ public class PatientController {
   //Takes a Patient as input for their ARN number, message will be the email body, subject is email subject header. 
   //The email for the patient will NOT receive this if it hasnt confirmed the initial SNS email. 
   @PostMapping("/newAlert")
-  public PublishResult newAlert(@RequestBody Patient patient, String message, String subject) {
-    return notificationService.publishNotification(patient.getARN(), message, subject);
+  public PublishResult newAlert(@RequestBody Alert alert) {
+	  System.out.println("newalter");
+	  System.out.println(alert.getPatient());
+	  System.out.println(alert.getMessage());
+    return notificationService.publishNotification(alert.getPatient().getARN(), alert.getMessage(), alert.getSubject());
   }
 }
 
