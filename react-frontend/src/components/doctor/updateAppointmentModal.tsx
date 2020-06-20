@@ -111,6 +111,7 @@ export class UpdateAppointmentModal extends React.Component<UpdateAppointmentMod
         }else{
             app = new Appointment(this.props.appointment.appointmentId,this.props.appointment.details,this.props.appointment.dateSlot,this.props.appointment.timeSlot,this.props.appointment.doctor,this.props.appointment.patient,status,this.props.appointment.type)
         }
+        this.props.toggleModal();
         console.log(app)
         await updateAppointments(app);
         this.props.changeAppointments();

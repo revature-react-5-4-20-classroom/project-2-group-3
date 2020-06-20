@@ -9,6 +9,7 @@ import { UpdateAppointmentModal } from "./updateAppointmentModal";
 interface DoctorAppointmentComponentState {
     appointments : Appointment[],
     displayModal: boolean,
+    appointmentIndex : 0,
 }
 
 
@@ -19,6 +20,7 @@ constructor(props:any) {
     this.state = {
         appointments : [],
         displayModal : false,
+        appointmentIndex : 0
     }
 }
 
@@ -27,6 +29,12 @@ toggleModal = () => {
         displayModal : !this.state.displayModal
     })
 }
+
+setAppointmentIndex = async (event:any) => {
+    await this.setState({
+        appointmentIndex : event.target.value
+    })
+} 
 
 componentDidMount = async () => {
     this.setState({
@@ -39,10 +47,19 @@ changeAppointments = async () => {
         appointments : await getAppointments(store.getState().loginUser.doctor.doctorId)
     })
 }
-
+openModal = async (event:any) => {
+    await this.setAppointmentIndex(event)
+    this.toggleModal();
+}
 showAppointments() {
-    return this.state.appointments.map( (app) => {
+    return this.state.appointments.map( (app,index) => {
         let patientFullName = `${app.patient.firstName} ${app.patient.lastName}`;
+        let hiddenBoolean : boolean;
+        if(app.status.statusId !== 1){
+            hiddenBoolean = true;
+        }else{
+            hiddenBoolean = false;
+        }
         return (
             <div key={app.appointmentId}>
                 <Col>
@@ -68,11 +85,11 @@ showAppointments() {
                                     Details: {app.details}
                                 </ListGroupItem>  
                             </ListGroup>
-                            <Button onClick={this.toggleModal} color="info">Update</Button>
+                            <Button hidden={hiddenBoolean} value={index} onClick={this.openModal} color="info">Update</Button>
                         </CardBody>
                     </Card>
                 </Col>
-                {this.state.displayModal ? <UpdateAppointmentModal changeAppointments={this.changeAppointments} appointment={app} toggleModal={this.toggleModal} displayModal={this.state.displayModal}/> : <></>}
+                {this.state.displayModal ? <UpdateAppointmentModal changeAppointments={this.changeAppointments} appointment={this.state.appointments[this.state.appointmentIndex]} toggleModal={this.toggleModal} displayModal={this.state.displayModal}/> : <></>}
             </div>
         )
     })
