@@ -9,7 +9,8 @@ import { LastRecord } from '../../models/lastRecord';
 interface PatientListComponentState {
     patients : Patient[];
     isOpen : boolean;
-    index : number;
+    lastRecordIndex : number;
+    patientIndex : number;
 }
 export class PatientListComponent extends React.Component<any,PatientListComponentState> {
     constructor(props:any){
@@ -17,7 +18,8 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
         this.state = {
             patients : [],
             isOpen : false,
-            index : 0,
+            lastRecordIndex : 0,
+            patientIndex : 0,
         }
     }   
     
@@ -35,15 +37,18 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
 
     makeModal = (event:any) => {
         this.setState({
-            index : event.target.value
+            lastRecordIndex : event.target.value
         })
         this.toggleModal()
     }
-    routeAppointment = () => {
+    routeAppointment = (event:any) => {
+        this.setState({
+            patientIndex : event.target.value
+        })
         this.props.history.push({
             pathname: "/patients/newappointment",
             state : {
-                patient : this.state.patients[0]
+                patient : this.state.patients[this.state.patientIndex]
             }
         })
     }
@@ -83,11 +88,11 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
                                     </ListGroupItem>
                                 </ListGroup> 
                                 {patient.lastRecord ? <Button value={index} color="info" onClick={this.makeModal}>More</Button> : <></>}
-                                <Button onClick={this.routeAppointment}>Make Appointment</Button>
+                                <Button value={index} onClick={this.routeAppointment}>Make Appointment</Button>
                             </CardBody>
                         </Card>
                     </Col>
-                    {this.state.isOpen && patient.lastRecord ? <PhysicalRecordModal lastRecord={this.state.patients[this.state.index].lastRecord} isOpen={this.state.isOpen} toggleModal={this.toggleModal}/> : <></>}
+                    {this.state.isOpen && patient.lastRecord ? <PhysicalRecordModal lastRecord={this.state.patients[this.state.lastRecordIndex].lastRecord} isOpen={this.state.isOpen} toggleModal={this.toggleModal}/> : <></>}
                 </div>
             )
         })
