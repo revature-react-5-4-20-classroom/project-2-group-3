@@ -23,7 +23,7 @@ public class AppointmentController {
   
   @GetMapping
   public List<Appointment> getAllAppointments(){
-    return appointmentService.getAll();
+    return appointmentService.getAllJ();
   }
   
   @GetMapping("/{id}")

@@ -42,5 +42,11 @@ public class AppointmentService {
       throw new AppointmentNotFoundException();
     }
   }
+  
+  public List<Appointment> getAllJ() {
+	    return appointmentRepository.findAllByOrderByAppointmentIdDesc();
+	  }
+  
+  
 
 }
