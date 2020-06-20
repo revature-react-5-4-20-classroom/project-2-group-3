@@ -59,7 +59,12 @@ Speciality: {this.props.doctor.speciality}
 
 <Collapse isOpen={this.state.isOpen}>
 <div>
-<EXpNewAppointmentComponent   doctor={this.props.doctor}/>
+
+
+{this.props.doctor&&
+    <EXpNewAppointmentComponent   doctor={this.props.doctor}/>
+}
+
 {/* <MakeNewAppointmentComponent doctor={this.props.doctor}/> */}
 
 

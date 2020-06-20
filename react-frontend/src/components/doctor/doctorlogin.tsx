@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from "reactstrap";
 
 import { withRouter } from 'react-router-dom'
 import { loginDoctor } from '../../api/apidoctor';
+import { toast } from 'react-toastify';
 
 
 export class DoctorLoginComponent extends React.Component<any,any>{
@@ -28,7 +29,8 @@ this.props.history.push("/doctor/home");
 
 
     }catch(e){
-        // toast("invalid credentials", { type: "error" });
+        toast("invalid credentials", { type: "error" });
+       
         console.log(e);
 
     }

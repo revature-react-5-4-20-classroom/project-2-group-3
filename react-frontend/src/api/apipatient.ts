@@ -20,14 +20,17 @@ export const project2 = axios .create({
 
 
 //login patient
-export const loginpatient=async(un:string,pas:string)=>{
+export const loginpatient=async(un:string,pas:string):Promise<Patient>=>{
 try{
+    console.log("login")
 let response=await project2.post("/patients/login",{username:un,password:pas});
-const{patientId,lastRecord,firstName,lastName,gender,username,password,birthDate,address,phone,email}=response.data;
-let patient=new Patient(patientId,firstName,lastName,gender,username,password,birthDate,address,phone,email,lastRecord);
+const{patientId,lastRecord,firstName,lastName,gender,username,password,birthDate,address,phone,email,arn}=response.data;
+console.log(arn)
+let patient=new Patient(patientId,firstName,lastName,gender,username,password,birthDate,address,phone,email,lastRecord,arn);
+console.log(patient)
 store.dispatch(loginSavePatient(patient));
 store.dispatch(loginSaveDoctor(new Doctor(0,"","","","","",new Department(0,""))));
-return response;
+return patient;
 }
 catch(e){
     throw e;
@@ -129,3 +132,50 @@ export const saveEmergency=async(name:string,address:string,phone:string,relatio
         throw e
     }
 }
+
+
+//new subcriber request
+export const newPatientSub=async(patient:Patient)=>{
+try{
+
+    console.log(patient);
+    let response=await project2.post("/patients/newSub",{patientId:patient.patientId,lastRecord:patient.lastRecord,firstName:patient.firstName,lastName:patient.lastName,
+    gender:patient.gender,username:patient.username,password:patient.password,birthDate:patient.birthDate,address:patient.address,phone:patient.phone,
+email:patient.email,topicArn:patient.arn});
+
+
+
+
+}catch(e){
+console.log(e);
+
+}
+
+
+
+
+}
+
+
+export const newAlert=async(patient:Patient,body:string,subject:string)=>{
+    try{
+console.log(patient.arn);
+
+        let pat={patientId:patient.patientId,lastRecord:patient.lastRecord,firstName:patient.firstName,lastName:patient.lastName,
+            gender:patient.gender,username:patient.username,password:patient.password,birthDate:patient.birthDate,address:patient.address,phone:patient.phone,
+        email:patient.email,arn:patient.arn};
+
+        let resposne=await project2.post("/patients/newAlert",{patient:pat,message:body,subject:subject});
+    }catch(e){
+console.log(e)
+    }
+
+}
+
+// function patienF=function(){
+
+
+
+
+
+// }

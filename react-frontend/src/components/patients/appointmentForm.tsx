@@ -5,11 +5,12 @@ import { Doctor } from "../../models/doctor";
 import { IState } from "../../redux/reducers";
 import { loginSavePatient,loginSaveDoctor} from "../../redux/action-mappers";
 import { connect } from "react-redux";
-import { ChangeTimeSlotComponent } from "./changeTimeSlot";
+import { ChangeTimeSlotComponent, changeView } from "./changeTimeSlot";
 import { Status } from "../../models/appointmentstatus";
 import { Type } from "../../models/appointmentType";
-import { saveAppointment } from "../../api/apipatient";
+import { saveAppointment, newAlert } from "../../api/apipatient";
 import { withRouter } from "react-router-dom";
+import { Patient } from "../../models/patient";
 
 
 interface IProps{
@@ -94,20 +95,32 @@ let dateSlot=this.props.dateslot;
 console.log(dateSlot);
 let timeSlot=this.props.timeslot;
 let doctor=this.props.doctor1;
-let patient=this.props.patient;
+let patient:Patient=this.props.patient;
 let status=new Status(1,"scheduled");
 let typename=this.changeType();
 let type=new Type(this.state.type,typename);
+let newtimeslot=changeView(timeSlot);
+console.log(newtimeslot);
 try{
 let response=await saveAppointment(details,dateSlot,timeSlot,doctor,patient,status,type);
 console.log(response);
-this.props.history.push("/patient/appointments");
+if(patient.arn!==null||patient.arn!==undefined){
+
+let body=`
+Hello ${patient.firstName}   ${patient.lastName}
+Thanks for booking an appointment on ${dateSlot} from ${newtimeslot}. 
+Looking foward to meeting you here.`
+
+    let response=await newAlert(patient,body,"new appointment");
+}
+
+
 }catch(e){
 console.log(e);
 }
 this.changeModal();
 // this.props.history.push("/patient/appointments");
-
+this.props.history.push("/patient/appointments");
 
 
 }
