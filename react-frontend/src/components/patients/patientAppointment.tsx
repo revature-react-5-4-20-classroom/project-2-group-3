@@ -3,9 +3,10 @@ import React from "react";
 import { patientAllAppointment } from "../../api/apipatient";
 import { IState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, CardBody } from "reactstrap";
 import { DisplayPatientAppointmentComponent } from "./displaypatientAppointment";
 import { Appointment } from "../../models/appointment";
+import { ChangeTimeSlotComponent } from "./changeTimeSlot";
 
 
 interface IPatientAppState{
@@ -52,7 +53,17 @@ let statusappointment=appointments.filter((elem:Appointment)=>{return elem.statu
     render(){
 if(this.state.appointment){
     return(
-<>
+
+
+
+
+
+
+
+
+
+
+ <>
    <Container>
        <Row>
 <Col>
@@ -69,12 +80,12 @@ if(this.state.appointment){
        </Container>   
       
       
-        </>
+         </> )}
     
         
         
-                )
-            }
+    //         )})    
+    // )}
             if(!this.state.appointment){
                 return(
                     <p></p>

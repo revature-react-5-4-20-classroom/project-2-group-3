@@ -24,8 +24,9 @@ export const loginpatient=async(un:string,pas:string):Promise<Patient>=>{
 try{
     console.log("login")
 let response=await project2.post("/patients/login",{username:un,password:pas});
+console.log(response.data)
 const{patientId,lastRecord,firstName,lastName,gender,username,password,birthDate,address,phone,email,arn}=response.data;
-console.log(arn)
+console.log(arn);
 let patient=new Patient(patientId,firstName,lastName,gender,username,password,birthDate,address,phone,email,lastRecord,arn);
 console.log(patient)
 store.dispatch(loginSavePatient(patient));

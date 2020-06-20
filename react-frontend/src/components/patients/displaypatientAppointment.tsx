@@ -23,19 +23,20 @@ constructor(props:IDisplayProps){
 
 componentDidMount=()=>{
    
-    this.setState({
-        appoint:this.props.appointments
+    // this.setState({
+    //     appoint:this.props.appointments
 
-    })
+    // })
 }
 
 
 
     render(){
 console.log(this.state.appoint);
-      if(this.state.appoint){
+      if(this.props.appointments){
+          console.log("hi")
 return(
-      this.state.appoint.map((elem:Appointment)=>{
+      this.props.appointments.map((elem:Appointment)=>{
 
 
         return(

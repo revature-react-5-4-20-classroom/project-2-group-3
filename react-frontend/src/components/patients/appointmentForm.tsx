@@ -120,7 +120,7 @@ console.log(e);
 }
 this.changeModal();
 // this.props.history.push("/patient/appointments");
-this.props.history.push("/patient/appointments");
+// this.props.history.push("/patient/appointments");
 
 
 }
