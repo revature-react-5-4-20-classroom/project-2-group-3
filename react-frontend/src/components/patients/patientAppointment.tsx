@@ -5,6 +5,7 @@ import { IState } from "../../redux/reducers";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import { DisplayPatientAppointmentComponent } from "./displaypatientAppointment";
+import { Appointment } from "../../models/appointment";
 
 
 interface IPatientAppState{
@@ -29,9 +30,12 @@ try{
     let id=this.props.patient.patientId;
     let appointments=await patientAllAppointment(id);
    if(appointments){
+
+let statusappointment=appointments.filter((elem:Appointment)=>{return elem.status.statusId==1})
+
     console.log(appointments);
     this.setState({
-        appointment:appointments,
+        appointment:statusappointment,
     });
    } 
    
