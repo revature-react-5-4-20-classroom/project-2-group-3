@@ -3,7 +3,8 @@ import { Status } from '../../models/appointmentstatus';
 import { Type } from '../../models/appointmentType';
 import { Modal, Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Appointment } from '../../models/appointment';
-import { createAppointment } from '../../api/apidoctor';
+import { createAppointment, newDoctorAlert } from '../../api/apidoctor';
+import {changeView} from './doctorTimeSlot'
 
 interface IProps{
     onDisplay:any,
@@ -89,10 +90,19 @@ onSubmits=async(event:any)=>{
     let typename=this.changeType();
     let type=new Type(this.state.type,typename);
     let app : Appointment = new Appointment(0,details,dateSlot,timeSlot,doctor,patient,status,type)
+    let newtimeslot=changeView(timeSlot);
+    console.log(newtimeslot);
     try{
         let response=await createAppointment(app);
-    //console.log(response);
-    //this.props.history.push("/patient/appointments");
+        if(patient.arn!==null||patient.arn!==undefined){
+            let body=`
+                Hello ${patient.firstName} ${patient.lastName},
+                This is ${doctor.firstName} ${doctor.lastName}, I booked
+                an appointment for you on ${dateSlot} from ${newtimeslot}. 
+                See you soon.`
+
+                let response = await newDoctorAlert(patient,body,"New Appointment")
+        }
     }catch(e){
     console.log(e);
     }

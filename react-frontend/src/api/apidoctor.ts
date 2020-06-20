@@ -69,13 +69,24 @@ export const createPhysicalRecord = async(lastRecord:LastRecord) : Promise<void>
 export const getPatients = async () : Promise<Patient[]> => {
     try{
         let response = await project2.get("/patients");
+        console.log(response.data)
         return response.data.map( (patient:any) => {
             let newPatient: Patient;
+            let lastRecord : LastRecord
             if(patient.lastRecord){ 
-                const lastRecord : LastRecord = new LastRecord(patient.lastRecord.appointmentId,patient.lastRecord.height,patient.lastRecord.weight,patient.lastRecord.age,patient.lastRecord.diagnosis,patient.lastRecord.prescribedAction,patient.lastRecord.prescribedMedication,patient.lastRecord.notes);
-                newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email,lastRecord)
+                lastRecord = new LastRecord(patient.lastRecord.appointmentId,patient.lastRecord.height,patient.lastRecord.weight,patient.lastRecord.age,patient.lastRecord.diagnosis,patient.lastRecord.prescribedAction,patient.lastRecord.prescribedMedication,patient.lastRecord.notes);
+                if(patient.arn){
+                    newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email,lastRecord,patient.arn)
+                }
+                else{
+                    newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email,lastRecord)
+                }
             }else{
-                newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email)
+                if(patient.arn){
+                    newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email,undefined,patient.arn)
+                }else{
+                    newPatient = new Patient(patient.patientId,patient.firstName,patient.lastName,patient.gender,patient.username,patient.password,patient.birthDate,patient.address,patient.phone,patient.email)
+                }
             }
             return newPatient;
         })
@@ -100,4 +111,15 @@ export const createAppointment = async (appointment:Appointment) => {
     }catch(e){
         throw e;
     }
+}
+
+export const newDoctorAlert = async (patient:Patient,body:string,subject:string) => {
+    console.log(patient.arn)
+    console.log(body)
+    console.log(subject)
+    let pat={patientId:patient.patientId,lastRecord:patient.lastRecord,firstName:patient.firstName,lastName:patient.lastName,
+        gender:patient.gender,username:patient.username,password:patient.password,birthDate:patient.birthDate,address:patient.address,phone:patient.phone,
+    email:patient.email,arn:patient.arn};
+
+    let resposne=await project2.post("/patients/newAlert",{patient:pat,message:body,subject:subject});
 }

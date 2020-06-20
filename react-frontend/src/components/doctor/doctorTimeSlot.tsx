@@ -133,3 +133,32 @@ render(){
 }
 
 }
+
+export let changeView=(timeSlot:number):String=>{
+ 
+    let timeFromTo="";
+    
+    let arrtimes=["","10-10:30 AM","10:30-11 AM","11-11:30 AM","11:30-12 PM","12-12:30 PM","12:30-1 PM","3-3:30 PM","3:30-4 PM","4-4:30 PM","4:30-5 PM"];
+    for(let i=1;i<=11;i++){
+        console.log("hello")
+        if(timeSlot==i){
+            timeFromTo=arrtimes[i];
+            console.log(timeFromTo)
+            break;
+        }
+    }
+    
+    
+    
+        console.log(timeFromTo);
+    
+    if(timeFromTo===""){
+        return "no vale"
+    }else{
+        return(
+            timeFromTo
+    
+        )
+    }
+    
+    }

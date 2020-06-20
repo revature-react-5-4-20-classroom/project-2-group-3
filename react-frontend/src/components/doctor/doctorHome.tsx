@@ -43,7 +43,6 @@ return(
             
 
             <Route path="*">
-patient card
             </Route>
 
 
