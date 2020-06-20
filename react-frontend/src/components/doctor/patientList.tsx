@@ -41,10 +41,17 @@ export class PatientListComponent extends React.Component<any,PatientListCompone
         })
         this.toggleModal()
     }
-    routeAppointment = (event:any) => {
+
+    setPatientIndex = async (event:any) => {
+        console.log(event.target.value)
         this.setState({
             patientIndex : event.target.value
         })
+    }
+
+    routeAppointment = async (event:any) => {
+        await this.setPatientIndex(event);
+        console.log(this.state.patientIndex)
         this.props.history.push({
             pathname: "/patients/newappointment",
             state : {
