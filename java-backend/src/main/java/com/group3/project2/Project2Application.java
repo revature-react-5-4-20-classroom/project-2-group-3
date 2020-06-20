@@ -22,6 +22,11 @@ public class Project2Application {
 		SpringApplication.run(Project2Application.class, args);
 	}
 	
+	@PostConstruct
+	public void init() {
+	  TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
+	
 
 	
 	@Bean
