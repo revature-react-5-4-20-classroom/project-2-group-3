@@ -39,7 +39,7 @@ this.setState({
 return(
     <div key={this.props.doctor.doctorId}>
     <Card>
-        {this.props.doctor.department.departmentName}
+        {/* {this.props.doctor.department.departmentName} */}
         <CardBody>
 <ListGroup>
 <ListGroupItem>

@@ -10,9 +10,9 @@ import { Type } from '../models/appointmentType';
 
 
 export const project2 = axios .create({
-    baseURL: 'http://localhost:1235/',
+    baseURL: 'http://ec2-18-191-218-24.us-east-2.compute.amazonaws.com:1235/'
 
-    // baseURL: "localhost:8080/",
+    // baseURL: "http://localhost:1235/",
     // If you don't have the following line, your login won't work!
     // withCredentials: true,
 });

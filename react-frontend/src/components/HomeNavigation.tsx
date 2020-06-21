@@ -18,7 +18,7 @@ return(
                  
                 </NavbarBrand>
                 <NavItem>
-          <NavLink  to="/home" className="nav-link" activeClassName="active">home</NavLink>
+          <NavLink  to="/home" className="nav-link" activeClassName="active">Home</NavLink>
         </NavItem>
         <NavItem>
           <NavLink  to="/patientlogin" className="nav-link" activeClassName="active">Patient</NavLink>
