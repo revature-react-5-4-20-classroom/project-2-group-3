@@ -13,5 +13,12 @@ public interface PatientRepository extends JpaRepository<Patient, Integer>{
   
   @Query("select u from Patient u where u.username = :username and u.password = :password")
   List<Patient> findByUsernameAndPassword(String username,String password);
+  
+  @Query(value = "select u.* from projecttwo.patient u, projecttwo.physicalrecord r, projecttwo.appointment a"
+      + " where (u.notificationarn IS NOT NULL) AND"
+      + " (u.last_record = r.appointment_id) AND"
+      + " (r.appointment_id = a.id) AND"
+      + " (a.date_slot < CURRENT_DATE - INTERVAL '3 months')", nativeQuery = true)
+  List<Patient> getUsersWithARNAndNoRecentAppointments();
 
 }

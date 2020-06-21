@@ -1,8 +1,10 @@
 package com.group3.project2.services;
 
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -14,6 +16,10 @@ import com.amazonaws.services.sns.model.CreateTopicResult;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
 import com.amazonaws.services.sns.model.SubscribeRequest;
+import com.group3.project2.models.Patient;
+import com.group3.project2.repositories.PatientRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class NotificationService {
@@ -27,10 +33,17 @@ public class NotificationService {
   @Value("${aws.region}")
   private String awsRegion;
   
+  @Autowired
+  PatientRepository patientRepository;
+  
   private AmazonSNS amazonSNS;
+  
+  private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
   
   @PostConstruct
   private void postConstructor() {
+    
+      
 
       AWSCredentialsProvider awsCredentialsProvider = new AWSStaticCredentialsProvider(
               new BasicAWSCredentials(awsAccessKey, awsSecretKey)
@@ -63,8 +76,14 @@ public class NotificationService {
   //This will query the Patient database for a list of Patients and their lastRecords to get their dates, and compare them to current date. 
   //If over a certain margin, call publishNotification for that specific Patient. 
   //It will definitely not be efficient in a large data-set.
+  @Scheduled(cron="0 0 * * * *")
   public void dbPolling() {
-    
+    logger.info("Beginning DB polling for notifications");
+    List<Patient> users= patientRepository.getUsersWithARNAndNoRecentAppointments();
+    for (Patient user: users) {
+      logger.info("DB POLLING: Sending new notification to " + user.getARN());
+      publishNotification(user.getARN(), "You have not had an appointment with us in at least 6 months. Please schedule a new one.", "Please Schedule an Appointment");
+    }
   }
   
   //Publish a new message to a TOPIC. Will only be received if a user is subscribed to a topic created for them, AND ITS CONFIRMED
