@@ -15,3 +15,12 @@ code {
 #homeinfo {
   color:darkblue
 }
+
+#patientlogin{
+background-image:url(./background.jpg);
+
+}
+
+#doctorlogin{
+  background-image: url(./background.jpg);
+}

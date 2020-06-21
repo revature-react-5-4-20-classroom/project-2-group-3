@@ -76,7 +76,7 @@ setPassword=(event:any)=>{
 
 
         return(
-            <div className="row align-items-center justify-content-center " style={{ height: "80%" }}  >
+            <div className="row align-items-center justify-content-center " id="patientlogin" style={{ height: "100%" }}  >
             <div className="login-column">
             <form onSubmit={this.verifyUser} className="form-signin " >
                 <h2 > Please login in</h2>
