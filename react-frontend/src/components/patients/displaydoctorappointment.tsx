@@ -55,7 +55,7 @@ Speciality: {this.props.doctor.speciality}
 
 
 
-<Button className=" mt-1 mb-1" onClick={this.toggle} >Make an Appointment</Button>
+<Button className=" mt-1 mb-1 bg-primary" onClick={this.toggle} >Make an Appointment</Button>
 
 <Collapse isOpen={this.state.isOpen}>
 <div>

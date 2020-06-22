@@ -92,11 +92,11 @@ console.log(e);
 
 return(
 
-<Container fluid className="bg-info">
+<Container fluid  id="create">
     <Row  >
         <Col sm="5" >
 <div className="h-10 w-70" style={{ height: "60%" }}>
-    <h2 className="text-white text-center" >Please enter all the details</h2>
+    <h2 className=" text-center mt-1" >Please enter all the details</h2>
                                <Form onSubmit={this.FormOnSUbmit}>
                                 <FormGroup>
                                     <Label for="userId">First Name  </Label>
