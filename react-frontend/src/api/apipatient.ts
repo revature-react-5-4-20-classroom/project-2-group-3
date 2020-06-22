@@ -136,19 +136,22 @@ export const saveEmergency=async(name:string,address:string,phone:string,relatio
 
 
 //new subcriber request
-export const newPatientSub=async(patient:Patient)=>{
+export const newPatientSub=async(patient:Patient):Promise<Patient>=>{
 try{
 
     console.log(patient);
     let response=await project2.post("/patients/newSub",{patientId:patient.patientId,lastRecord:patient.lastRecord,firstName:patient.firstName,lastName:patient.lastName,
     gender:patient.gender,username:patient.username,password:patient.password,birthDate:patient.birthDate,address:patient.address,phone:patient.phone,
 email:patient.email,topicArn:patient.arn});
+console.log(response);
+return response.data;
 
 
 
 
 }catch(e){
 console.log(e);
+throw e;
 
 }
 
