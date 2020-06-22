@@ -25,6 +25,7 @@ interface IMakeState {
 
 interface IMakeProp {
     doctor: Doctor;
+    toggle:any;
 
 }
 
@@ -143,6 +144,7 @@ console.log("hello")
         this.setState({
             modal: !this.state.modal
         })
+        this.props.toggle();
 
     }
 

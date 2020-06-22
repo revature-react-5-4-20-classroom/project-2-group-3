@@ -62,7 +62,7 @@ Speciality: {this.props.doctor.speciality}
 
 
 {this.props.doctor&&
-    <EXpNewAppointmentComponent   doctor={this.props.doctor}/>
+    <EXpNewAppointmentComponent  toggle={this.toggle}  doctor={this.props.doctor}/>
 }
 
 {/* <MakeNewAppointmentComponent doctor={this.props.doctor}/> */}
