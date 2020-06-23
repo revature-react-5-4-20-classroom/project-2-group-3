@@ -25,7 +25,7 @@ return(
     
 
     <>
-    <p>DoctorHome</p>
+  
 <Provider store={store}>
     
     <Router>

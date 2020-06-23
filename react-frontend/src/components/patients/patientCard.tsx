@@ -24,7 +24,7 @@ export class PatientCardComponent extends React.Component<any,any>{
 
 
 
-<Card className="card bg-info">
+<Card  id="patientcard">
     <CardHeader>
         <h2>{patient.firstName.toUpperCase()} {patient.lastName.toUpperCase()}</h2>
         </CardHeader>

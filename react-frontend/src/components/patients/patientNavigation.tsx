@@ -28,7 +28,7 @@ return(
 
 
 <>
-    <Navbar  color="light" light expand="md">
+    <Navbar   light expand="md" id="patientnav">
 
     <Nav  tabs className="w-100">
     <NavbarBrand>

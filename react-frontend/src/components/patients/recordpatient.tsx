@@ -14,7 +14,7 @@ export class RecordPatientComponent extends React.Component<any,any>{
     render(){
 
 
-if(this.props.patient){
+if(this.props.patient&&this.props.patient.lastRecord){
     let record:LastRecord=this.props.patient.lastRecord;
     return(
 <>

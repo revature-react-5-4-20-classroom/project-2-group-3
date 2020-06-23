@@ -72,7 +72,7 @@ console.log(this.props.patient);
                 <Container fluid >
                 <Row>
                     <Col sm="6">  
-                    <Button onClick={this.ontoggle} className="mb-1">Add New</Button>
+                    <Button onClick={this.ontoggle} className="mb-1 bg-primary">Add New</Button>
                     <NewEmergencyComponent ontoggle={this.ontoggle} modal={this.state.toggle} patient={this.props.patient}/>
               { 
                   econtact.map((elem:any,i:any)=>{

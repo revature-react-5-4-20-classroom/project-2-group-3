@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, Label, FormGroup, Input, Button } from "reac
 import { Patient } from "../../models/patient";
 import { createPatient } from '../../api/apipatient';
 import { withRouter } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Icreate{
 
@@ -74,6 +75,7 @@ constructor(props:any){
                 
                        let response=await createPatient(this.state.firstName,this.state.lastName,this.state.gender,this.state.username,this.state.password
                         ,this.state.birthDate,this.state.address,this.state.phone,this.state.email);
+                        toast("success", { type: "success" });
                        this.props.history.push("/patientlogin")
 
             }catch(e){
@@ -90,10 +92,11 @@ console.log(e);
 
 return(
 
-<Container >
+<Container fluid  id="create">
     <Row  >
         <Col sm="5" >
 <div className="h-10 w-70" style={{ height: "60%" }}>
+    <h2 className=" text-center mt-1" >Please enter all the details</h2>
                                <Form onSubmit={this.FormOnSUbmit}>
                                 <FormGroup>
                                     <Label for="userId">First Name  </Label>
@@ -141,7 +144,7 @@ return(
 
                                 </FormGroup>
                                 <FormGroup>
-                                    <Button type="submit" color="info">Submit</Button>
+                                    <Button type="submit" color="primary">Submit</Button>
                                 </FormGroup>
                             </Form>
                             </div>

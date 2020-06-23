@@ -104,7 +104,7 @@ console.log(newtimeslot);
 try{
 let response=await saveAppointment(details,dateSlot,timeSlot,doctor,patient,status,type);
 console.log(response);
-if(patient.arn!==null||patient.arn!==undefined){
+if(patient.arn!==null&&patient.arn!==undefined){
 
 let body=`
 Hello ${patient.firstName}   ${patient.lastName}

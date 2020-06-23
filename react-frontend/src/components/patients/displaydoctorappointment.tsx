@@ -39,7 +39,7 @@ this.setState({
 return(
     <div key={this.props.doctor.doctorId}>
     <Card>
-        {this.props.doctor.department.departmentName}
+        {/* {this.props.doctor.department.departmentName} */}
         <CardBody>
 <ListGroup>
 <ListGroupItem>
@@ -55,14 +55,14 @@ Speciality: {this.props.doctor.speciality}
 
 
 
-<Button className=" mt-1 mb-1" onClick={this.toggle} >Make an Appointment</Button>
+<Button className=" mt-1 mb-1 bg-primary" onClick={this.toggle} >Make an Appointment</Button>
 
 <Collapse isOpen={this.state.isOpen}>
 <div>
 
 
 {this.props.doctor&&
-    <EXpNewAppointmentComponent   doctor={this.props.doctor}/>
+    <EXpNewAppointmentComponent  toggle={this.toggle}  doctor={this.props.doctor}/>
 }
 
 {/* <MakeNewAppointmentComponent doctor={this.props.doctor}/> */}

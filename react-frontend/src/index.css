@@ -12,3 +12,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#homeinfo {
+  color:darkblue
+}
+
+#patientlogin{
+background-image:url(./background.jpg);
+
+}
+
+#doctorlogin{
+  background-image: url(./background.jpg);
+}
+
+#create{
+  background-image: url(./background.jpg);
+}
+
+#patientcard{
+  background-color:rgb(0, 102, 153) ;
+  font-weight: 700;
+  
+}

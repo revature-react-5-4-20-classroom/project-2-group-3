@@ -5,7 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import { loginpatient, newPatientSub, newAlert } from '../../api/apipatient';
 import { Patient } from '../../models/patient';
-
+import { IState } from '../../redux/reducers';
+import { connect } from 'react-redux';
+import { loginSavePatient,loginSaveDoctor} from "../../redux/action-mappers";
 
 export class PatientLoginComponent extends React.Component<any,any>{
 
@@ -28,11 +30,14 @@ console.log(patient);
 console.log(patient.arn);
 
 // let res=await newAlert(patient,"hello","me for");
-
+try{
 if(patient.arn===null||patient.arn===undefined){
-    let response=await  newPatientSub(patient);
-    console.log("hi")
-
+    let response:Patient=await  newPatientSub(patient);
+    console.log("hi");
+    this.props.loginSavePatient(response);
+}
+}catch(e){
+console.log(e);
 }
 
 
@@ -76,7 +81,7 @@ setPassword=(event:any)=>{
 
 
         return(
-            <div className="row align-items-center justify-content-center " style={{ height: "80%" }}  >
+            <div className="row align-items-center justify-content-center " id="patientlogin" style={{ height: "100%" }}  >
             <div className="login-column">
             <form onSubmit={this.verifyUser} className="form-signin " >
                 <h2 > Please login in</h2>
@@ -109,3 +114,24 @@ setPassword=(event:any)=>{
 }
 
 export const PatientLoginComponentR=withRouter(PatientLoginComponent);
+
+
+
+const mapStateToProps = (state: IState) => {
+ 
+    return {
+      ...state.loginUser
+    }
+  
+  }
+  
+  const mapDispatchToProps = {
+loginSavePatient,
+loginSaveDoctor
+
+  
+  
+  }
+  
+  
+  export let  PatientLoginComponentRW = connect(mapStateToProps, mapDispatchToProps)(PatientLoginComponentR);
